@@ -24,18 +24,18 @@ gtag('js',new Date());gtag('config','G-JE8Q86BKDQ');
 :root{
   --bg:#ecebe8; --paper:#f7f6f4; --ink:#1b1c1d; --muted:#6a6b6c; --line:#d3d1cc;
   --accent:#8a7a63; --btn:#1b1c1d; --btn-ink:#f7f6f4;
-  --ph:#dcdad5; --ph-ink:#3a3b3c;
+  --ph:#dcdad5; --ph-ink:#3a3b3c; --sale:#b23a22;
   --body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#151616; --paper:#1d1e1f; --ink:#e9e8e5; --muted:#9a9a98; --line:#2f3031;
   --accent:#b8a689; --btn:#e9e8e5; --btn-ink:#151616;
-  --ph:#262728; --ph-ink:#bdbcb8; color-scheme:dark}}
+  --ph:#262728; --ph-ink:#bdbcb8; --sale:#e8735a; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#151616; --paper:#1d1e1f; --ink:#e9e8e5; --muted:#9a9a98; --line:#2f3031;
   --accent:#b8a689; --btn:#e9e8e5; --btn-ink:#151616;
-  --ph:#262728; --ph-ink:#bdbcb8; color-scheme:dark}
+  --ph:#262728; --ph-ink:#bdbcb8; --sale:#e8735a; color-scheme:dark}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7}
 
 .hero{background:var(--ph)}
@@ -89,6 +89,9 @@ h2{font-weight:700;font-size:16px;line-height:1.45;margin:0;text-wrap:balance}
 .imglink{display:grid;place-items:center;width:100%;height:100%}
 .imglink svg{width:54%;height:auto}
 .pricebox{display:grid;gap:2px}
+.price .orig{color:var(--muted);font-size:13px;margin-right:8px;text-decoration-thickness:1px}
+.price .now{color:var(--sale);font-weight:500}
+.price .off{display:inline-block;margin-left:8px;font-size:11px;letter-spacing:.04em;color:var(--sale);border:1px solid currentColor;padding:0 5px;vertical-align:2px}
 .sold{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 .slides{display:flex;width:100%;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
 .slides::-webkit-scrollbar{display:none}
@@ -155,47 +158,47 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
 /* ====== 商品清單 ======
    code 型號｜cat 分類｜icon 示意圖｜made 開久自家製造｜img 商品照片（上傳後填入）｜link 蝦皮分潤連結 */
 const products = [
-  {code:"J38",  name:"輕防曬連帽外套", cat:"外套", icon:"jacket", price:1280, desc:"輕薄尼龍布料，防潑水，雙拉鍊，換季帶著走剛好。", link:"https://s.shopee.tw/W7mKrSYtE"},
-  {code:"CJ02", name:"Boxy Zipped Hoodie 短版連帽外套", cat:"外套", icon:"zip", price:1330, made:1, desc:"短版 Boxy 輪廓的拉鍊帽外套，刷毛內裡夠保暖。", link:"https://s.shopee.tw/4Vdv6GlFcH"},
-  {code:"J33",  name:"刷毛雙拉鏈連帽外套", cat:"外套", icon:"zip", price:1530, desc:"純棉刷毛加雙拉鍊，三色可選，秋冬主力外套。", link:"https://s.shopee.tw/1qd9vNhO3p"},
+  {code:"J38",  name:"輕防曬連帽外套", cat:"外套", icon:"jacket", price:1280, desc:"輕薄尼龍布料，防潑水，雙拉鍊，換季帶著走剛好。", sold:"157", link:"https://s.shopee.tw/W7mKrSYtE"},
+  {code:"CJ02", name:"Boxy Zipped Hoodie 短版連帽外套", cat:"外套", icon:"zip", price:1330, made:1, desc:"短版 Boxy 輪廓的拉鍊帽外套，刷毛內裡夠保暖。", sold:"106", link:"https://s.shopee.tw/4Vdv6GlFcH"},
+  {code:"J33",  name:"刷毛雙拉鏈連帽外套", cat:"外套", icon:"zip", price:1530, desc:"純棉刷毛加雙拉鍊，三色可選，秋冬主力外套。", sold:"223", link:"https://s.shopee.tw/1qd9vNhO3p"},
 
-  {code:"J39",  name:"紋理立領拉鏈夾克", cat:"外套", icon:"jacket", price:1330, desc:"立領加長拉鍊，紋理尼龍布料防潑水，秋天單穿剛好。", link:"https://s.shopee.tw/5VWSLq2FYw"},
+  {code:"J39",  name:"紋理立領拉鏈夾克", cat:"外套", icon:"jacket", price:1330, desc:"立領加長拉鍊，紋理尼龍布料防潑水，秋天單穿剛好。", sold:"7", link:"https://s.shopee.tw/5VWSLq2FYw"},
 
-  {code:"A011", name:"寬短袖身素踢", cat:"上身", icon:"tee", price:480, made:1, desc:"285G 厚磅純棉，寬身短版的 Boxy 剪裁，素色最好搭。", link:"https://s.shopee.tw/30p7JAFSAY"},
-  {code:"T-10", name:"螺紋針織背心", cat:"上身", icon:"tank", price:380, desc:"300G 重磅純棉螺紋，單穿或疊在襯衫裡都可以。", link:"https://s.shopee.tw/5VWSHoDamx"},
-  {code:"CT26", name:"Muscle Fit 短衫", cat:"上身", icon:"tee", price:490, made:1, desc:"有彈性的合身版型，想穿修身一點就選這件。", link:"https://s.shopee.tw/qkcjIqyj0"},
-  {code:"T-59", name:"針織羅紋短袖 Polo", cat:"上身", icon:"polo", price:690, desc:"萊賽爾羅紋針織，亨利領，帶一點復古味。", link:"https://s.shopee.tw/4LKUtkBcAK"},
-  {code:"T-64", name:"條紋針織短袖", cat:"上身", icon:"tee", price:580, desc:"棉質混紡的條紋針織，圓領，配寬褲很順。", link:"https://s.shopee.tw/7VHWfb9CUr"},
-  {code:"T-62", name:"橫紋理針織短袖", cat:"上身", icon:"polo", price:680, desc:"橫向紋理加亨利領，比素 T 正式一點。", link:"https://s.shopee.tw/6q1psR5aOD"},
-  {code:"T-67", name:"針織紋理打底衫", cat:"上身", icon:"long", price:690, desc:"薄款長袖針織，秋冬當內搭打底最實用。", link:"https://s.shopee.tw/4Vdv69wG8Z"},
-  {code:"T-22", name:"側口袋 Boxy 衛衣", cat:"上身", icon:"long", price:760, desc:"500G 重磅大學 T，寬短版型，側邊多了口袋。", link:"https://s.shopee.tw/5fpsUJwMbV"},
-  {code:"T-60", name:"紋理刺繡條紋襯衫", cat:"上身", icon:"shirt", price:750, desc:"條紋加刺繡細節，敞開當罩衫做層次。", link:"https://s.shopee.tw/3g4o6ecy8T"},
-  {code:"T-23", name:"立體素面帽踢", cat:"上身", icon:"hoodie", price:799, desc:"重磅抓絨帽 T，寬鬆素面，冬天穿很暖。", link:"https://s.shopee.tw/AKbi2udqmD"},
-  {code:"T-44", name:"紋理針織套衫", cat:"上身", icon:"long", price:680, desc:"四色可選的寬鬆紋理針織，內搭外穿都行。", link:"https://s.shopee.tw/9APkenuovW"},
-  {code:"CD07", name:"NODE TEE", cat:"上身", icon:"tee", price:760, made:1, desc:"開久製造的圖 T，酵洗純棉，穿起來軟。", link:"https://s.shopee.tw/50aBh9wwSo"},
-  {code:"T-17", name:"Oversize 水洗帽踢", cat:"上身", icon:"hoodie", price:775, desc:"水洗純棉重磅，落肩寬鬆，帶口袋。", link:"https://s.shopee.tw/80DnGgTWCd"},
-  {code:"CD09", name:"WALKING MAN BIG PRINT LONG SLEEVE", cat:"上身", icon:"long", price:980, made:1, desc:"開久製造的大圖印花薄長袖，100% 純棉。", link:"https://s.shopee.tw/8pmuGDqkEV"},
-  {code:"CT05", name:"BOXY 短版帽T", cat:"上身", icon:"hoodie", price:890, desc:"寬短 Boxy 帽 T，配高腰寬褲比例最好。", link:"https://s.shopee.tw/1BVk1Nyc5"},
-  {code:"T-43", name:"層次磨邊打底長袖", cat:"上身", icon:"long", price:680, desc:"磨邊刷破細節的純棉薄長袖，打底很有層次。", link:"https://s.shopee.tw/AKbi31EkW3"},
+  {code:"A011", name:"寬短袖身素踢", cat:"上身", icon:"tee", price:480, made:1, desc:"285G 厚磅純棉，寬身短版的 Boxy 剪裁，素色最好搭。", sold:"8,000+", link:"https://s.shopee.tw/30p7JAFSAY"},
+  {code:"T-10", name:"螺紋針織背心", cat:"上身", icon:"tank", price:380, desc:"300G 重磅純棉螺紋，單穿或疊在襯衫裡都可以。", sold:"3,000+", link:"https://s.shopee.tw/5VWSHoDamx"},
+  {code:"CT26", name:"Muscle Fit 短衫", cat:"上身", icon:"tee", price:490, made:1, desc:"有彈性的合身版型，想穿修身一點就選這件。", sold:"145", link:"https://s.shopee.tw/qkcjIqyj0"},
+  {code:"T-59", name:"針織羅紋短袖 Polo", cat:"上身", icon:"polo", price:690, desc:"萊賽爾羅紋針織，亨利領，帶一點復古味。", sold:"469", link:"https://s.shopee.tw/4LKUtkBcAK"},
+  {code:"T-64", name:"條紋針織短袖", cat:"上身", icon:"tee", price:580, desc:"棉質混紡的條紋針織，圓領，配寬褲很順。", sold:"248", link:"https://s.shopee.tw/7VHWfb9CUr"},
+  {code:"T-62", name:"橫紋理針織短袖", cat:"上身", icon:"polo", price:680, desc:"橫向紋理加亨利領，比素 T 正式一點。", sold:"158", link:"https://s.shopee.tw/6q1psR5aOD"},
+  {code:"T-67", name:"針織紋理打底衫", cat:"上身", icon:"long", price:690, desc:"薄款長袖針織，秋冬當內搭打底最實用。", sold:"24", link:"https://s.shopee.tw/4Vdv69wG8Z"},
+  {code:"T-22", name:"側口袋 Boxy 衛衣", cat:"上身", icon:"long", price:760, desc:"500G 重磅大學 T，寬短版型，側邊多了口袋。", sold:"1,000+", link:"https://s.shopee.tw/5fpsUJwMbV"},
+  {code:"T-60", name:"紋理刺繡條紋襯衫", cat:"上身", icon:"shirt", price:750, desc:"條紋加刺繡細節，敞開當罩衫做層次。", sold:"199", link:"https://s.shopee.tw/3g4o6ecy8T"},
+  {code:"T-23", name:"立體素面帽踢", cat:"上身", icon:"hoodie", price:799, desc:"重磅抓絨帽 T，寬鬆素面，冬天穿很暖。", sold:"547", orig:890, off:"9折", link:"https://s.shopee.tw/AKbi2udqmD"},
+  {code:"T-44", name:"紋理針織套衫", cat:"上身", icon:"long", price:680, desc:"四色可選的寬鬆紋理針織，內搭外穿都行。", sold:"274", link:"https://s.shopee.tw/9APkenuovW"},
+  {code:"CD07", name:"NODE TEE", cat:"上身", icon:"tee", price:760, made:1, desc:"開久製造的圖 T，酵洗純棉，穿起來軟。", sold:"75", link:"https://s.shopee.tw/50aBh9wwSo"},
+  {code:"T-17", name:"Oversize 水洗帽踢", cat:"上身", icon:"hoodie", price:775, desc:"水洗純棉重磅，落肩寬鬆，帶口袋。", sold:"382", orig:790, off:"9.8折", link:"https://s.shopee.tw/80DnGgTWCd"},
+  {code:"CD09", name:"WALKING MAN BIG PRINT LONG SLEEVE", cat:"上身", icon:"long", price:980, made:1, desc:"開久製造的大圖印花薄長袖，100% 純棉。", sold:"2", link:"https://s.shopee.tw/8pmuGDqkEV"},
+  {code:"CT05", name:"BOXY 短版帽T", cat:"上身", icon:"hoodie", price:890, desc:"寬短 Boxy 帽 T，配高腰寬褲比例最好。", sold:"153", link:"https://s.shopee.tw/1BVk1Nyc5"},
+  {code:"T-43", name:"層次磨邊打底長袖", cat:"上身", icon:"long", price:680, desc:"磨邊刷破細節的純棉薄長袖，打底很有層次。", sold:"105", link:"https://s.shopee.tw/AKbi31EkW3"},
 
-  {code:"L91",  name:"細條紋打褶西裝褲", cat:"下身", icon:"pants", price:980, desc:"細條紋加打褶，寬鬆落地版型，蝦皮上賣超過四千件。", link:"https://s.shopee.tw/2gCGuZmUWW"},
-  {code:"L-03", name:"抽繩打褶立體棉褲", cat:"下身", icon:"pants", price:890, desc:"抽繩腰頭加打褶，寬版棉褲穿起來放鬆又有型。", link:"https://s.shopee.tw/4qGlUZiJ82"},
-  {code:"A014", name:"彎刀西裝落地褲", cat:"下身", icon:"pants", price:980, made:1, desc:"彎刀褲型修飾腿型，西裝布料的落地長度。", link:"https://s.shopee.tw/LoM8Jyxx6"},
-  {code:"L83",  name:"打褶剪裁闊腿褲", cat:"下身", icon:"pants", price:880, desc:"100% 純棉，打褶闊腿，低飽和色好配色。", link:"https://s.shopee.tw/2BG0JhIw1b"},
-  {code:"L99",  name:"淺灰杏打褶落地褲", cat:"下身", icon:"pants", price:890, desc:"淺灰杏色的打褶落地褲，日系工作褲的味道。", link:"https://s.shopee.tw/2qVh6vnfbU"},
-  {code:"L-01", name:"打褶西裝落地褲", cat:"下身", icon:"pants", price:890, desc:"黑色打褶西裝落地褲，正式休閒都撐得住。", link:"https://s.shopee.tw/2gCGueg0GK"},
-  {code:"L-07", name:"原牛多裁線寬褲", cat:"下身", icon:"pants", price:980, desc:"原色丹寧加多道裁線，Baggy 寬版牛仔褲。", link:"https://s.shopee.tw/1142vbLowb"},
-  {code:"CL05", name:"多褶落地西裝褲", cat:"下身", icon:"pants", price:980, desc:"多道褶線撐出彎刀輪廓的落地西裝褲。", link:"https://s.shopee.tw/1BVjmylV4"},
-  {code:"L80",  name:"流線剪裁彎刀褲", cat:"下身", icon:"pants", price:890, desc:"復古水洗牛仔，流線彎刀剪裁。", link:"https://s.shopee.tw/4B14hSV1cG"},
-  {code:"L22",  name:"落地燈籠褲", cat:"下身", icon:"pants", price:880, desc:"高磅數布料，繭形燈籠褲型，垂墜感好。", link:"https://s.shopee.tw/60SispoRbo"},
-  {code:"CS04", name:"寬鬆雙褶工作短褲", cat:"下身", icon:"shorts", price:850, desc:"雙褶寬版的六分短褲，配中高筒襪剛好。", link:"https://s.shopee.tw/qkcjMLBQm"},
-  {code:"L84",  name:"丹寧落地寬褲", cat:"下身", icon:"pants", price:980, desc:"繭形收口的落地丹寧，復古水洗色。", link:"https://s.shopee.tw/LoM8RrTKr"},
-  {code:"CL01", name:"立體廓形西裝闊腿褲", cat:"下身", icon:"pants", price:980, desc:"立體廓形的西裝闊腿褲，黑色最百搭。", link:"https://s.shopee.tw/6Am95CHG3v"},
-  {code:"CL02", name:"立體紋理西裝闊腿褲", cat:"下身", icon:"pants", price:980, desc:"立體紋理布料，彎月版型的落地寬褲。", link:"https://s.shopee.tw/4B14has3Ql"},
+  {code:"L91",  name:"細條紋打褶西裝褲", cat:"下身", icon:"pants", price:980, desc:"細條紋加打褶，寬鬆落地版型，蝦皮上賣超過四千件。", sold:"4,000+", link:"https://s.shopee.tw/2gCGuZmUWW"},
+  {code:"L-03", name:"抽繩打褶立體棉褲", cat:"下身", icon:"pants", price:890, desc:"抽繩腰頭加打褶，寬版棉褲穿起來放鬆又有型。", sold:"936", link:"https://s.shopee.tw/4qGlUZiJ82"},
+  {code:"A014", name:"彎刀西裝落地褲", cat:"下身", icon:"pants", price:980, made:1, desc:"彎刀褲型修飾腿型，西裝布料的落地長度。", sold:"1,000+", link:"https://s.shopee.tw/LoM8Jyxx6"},
+  {code:"L83",  name:"打褶剪裁闊腿褲", cat:"下身", icon:"pants", price:880, desc:"100% 純棉，打褶闊腿，低飽和色好配色。", sold:"1,000+", link:"https://s.shopee.tw/2BG0JhIw1b"},
+  {code:"L99",  name:"淺灰杏打褶落地褲", cat:"下身", icon:"pants", price:890, desc:"淺灰杏色的打褶落地褲，日系工作褲的味道。", sold:"748", link:"https://s.shopee.tw/2qVh6vnfbU"},
+  {code:"L-01", name:"打褶西裝落地褲", cat:"下身", icon:"pants", price:890, desc:"黑色打褶西裝落地褲，正式休閒都撐得住。", sold:"503", link:"https://s.shopee.tw/2gCGueg0GK"},
+  {code:"L-07", name:"原牛多裁線寬褲", cat:"下身", icon:"pants", price:980, desc:"原色丹寧加多道裁線，Baggy 寬版牛仔褲。", sold:"307", link:"https://s.shopee.tw/1142vbLowb"},
+  {code:"CL05", name:"多褶落地西裝褲", cat:"下身", icon:"pants", price:980, desc:"多道褶線撐出彎刀輪廓的落地西裝褲。", sold:"159", link:"https://s.shopee.tw/1BVjmylV4"},
+  {code:"L80",  name:"流線剪裁彎刀褲", cat:"下身", icon:"pants", price:890, desc:"復古水洗牛仔，流線彎刀剪裁。", sold:"963", link:"https://s.shopee.tw/4B14hSV1cG"},
+  {code:"L22",  name:"落地燈籠褲", cat:"下身", icon:"pants", price:880, desc:"高磅數布料，繭形燈籠褲型，垂墜感好。", sold:"3,000+", link:"https://s.shopee.tw/60SispoRbo"},
+  {code:"CS04", name:"寬鬆雙褶工作短褲", cat:"下身", icon:"shorts", price:850, desc:"雙褶寬版的六分短褲，配中高筒襪剛好。", sold:"353", link:"https://s.shopee.tw/qkcjMLBQm"},
+  {code:"L84",  name:"丹寧落地寬褲", cat:"下身", icon:"pants", price:980, desc:"繭形收口的落地丹寧，復古水洗色。", sold:"1,000+", link:"https://s.shopee.tw/LoM8RrTKr"},
+  {code:"CL01", name:"立體廓形西裝闊腿褲", cat:"下身", icon:"pants", price:980, desc:"立體廓形的西裝闊腿褲，黑色最百搭。", sold:"318", link:"https://s.shopee.tw/6Am95CHG3v"},
+  {code:"CL02", name:"立體紋理西裝闊腿褲", cat:"下身", icon:"pants", price:980, desc:"立體紋理布料，彎月版型的落地寬褲。", sold:"56", link:"https://s.shopee.tw/4B14has3Ql"},
 
-  {code:"CH02", name:"雙色層次針織冷帽", cat:"配件", icon:"beanie", price:760, made:1, desc:"雙色層次的針織毛帽，有兩種尺寸可選。", link:"https://s.shopee.tw/3g4o6hgV5m"},
-  {code:"CB01", name:"Clipped Cargo Tote", cat:"配件", icon:"bag", price:1120, desc:"重磅布料加金屬消防釦的工裝托特包，耐用又有細節。", link:"https://s.shopee.tw/9fM1JWb3sp"},
-  {code:"A04",  name:"純棉長襪", cat:"配件", icon:"sock", price:60, desc:"中筒素色棉襪，無骨縫線，便宜又耐穿。", link:"https://s.shopee.tw/1142vWJmha"},
+  {code:"CH02", name:"雙色層次針織冷帽", cat:"配件", icon:"beanie", price:760, made:1, desc:"雙色層次的針織毛帽，有兩種尺寸可選。", sold:"48", link:"https://s.shopee.tw/3g4o6hgV5m"},
+  {code:"CB01", name:"Clipped Cargo Tote", cat:"配件", icon:"bag", price:1120, desc:"重磅布料加金屬消防釦的工裝托特包，耐用又有細節。", sold:"12", link:"https://s.shopee.tw/9fM1JWb3sp"},
+  {code:"A04",  name:"純棉長襪", cat:"配件", icon:"sock", price:60, desc:"中筒素色棉襪，無骨縫線，便宜又耐穿。", sold:"1萬+", link:"https://s.shopee.tw/1142vWJmha"},
 ];
 
 const newArrivals = [
@@ -263,7 +266,7 @@ function renderGrid(){
         <h2>${esc(p.name)}</h2>
         <p class="desc">${esc(p.desc)}</p>
         <div class="foot">
-          <div class="pricebox"><div class="price">${fmt(p.price)}</div>${p.sold?`<div class="sold">蝦皮已售出 ${esc(p.sold)}</div>`:""}</div>
+          <div class="pricebox"><div class="price">${p.orig?`<s class="orig">${fmt(p.orig)}</s>`:""}<span class="${p.orig?"now":""}">${fmt(p.price)}</span>${p.off?`<span class="off">${esc(p.off)}</span>`:""}</div>${p.sold?`<div class="sold">蝦皮已售出 ${esc(p.sold)}</div>`:""}</div>
           <a class="cart" href="${esc(p.link)}" target="_blank" rel="sponsored noopener" aria-label="到蝦皮購買 ${esc(p.name)}" title="到蝦皮購買"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.3l2-8H6.4"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="16.5" cy="19" r="1.4"/></svg></a>
         </div>
       </div>
