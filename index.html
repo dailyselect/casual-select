@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="整理台灣品牌開久 CASUAL SELECT 的單品，把日常做得好看一點。">
+<meta property="og:title" content="日常選物所｜開久 CASUAL SELECT">
+<meta property="og:description" content="把日常做得好看一點，專注在看似普通，卻真實能穿久的東西。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://gtr05457.github.io/casual-select/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<!-- Google Analytics：把 G-XXXXXXXXXX 換成你的評估 ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-XXXXXXXXXX');
+</script>
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>日常選物所</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 滿版四聯拍首圖 → 置左文案 → 一行四件、寬留白的商品格；低彩度灰階 */
+:root{
+  --bg:#ecebe8; --paper:#f7f6f4; --ink:#1b1c1d; --muted:#6a6b6c; --line:#d3d1cc;
+  --accent:#8a7a63; --btn:#1b1c1d; --btn-ink:#f7f6f4;
+  --ph:#dcdad5; --ph-ink:#3a3b3c;
+  --body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#151616; --paper:#1d1e1f; --ink:#e9e8e5; --muted:#9a9a98; --line:#2f3031;
+  --accent:#b8a689; --btn:#e9e8e5; --btn-ink:#151616;
+  --ph:#262728; --ph-ink:#bdbcb8; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#151616; --paper:#1d1e1f; --ink:#e9e8e5; --muted:#9a9a98; --line:#2f3031;
+  --accent:#b8a689; --btn:#e9e8e5; --btn-ink:#151616;
+  --ph:#262728; --ph-ink:#bdbcb8; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7}
+
+.hero{background:var(--ph)}
+.hero img{display:block;width:100%;height:clamp(380px,62vw,760px);object-fit:cover;object-position:50% 47%}
+
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:56px 72px}
+.lead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:24px 64px;align-items:end;padding-bottom:36px;border-bottom:1px solid var(--ink)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+h1{font-weight:900;font-size:clamp(36px,6vw,60px);line-height:1.05;margin:8px 0 0;letter-spacing:.04em}
+.copy{display:grid;gap:10px;max-width:34em}
+.copy p{margin:0}
+.copy .main{font-size:16px;line-height:1.9}
+.copy .note{font-size:13px;color:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;padding-block:56px 56px}
+.filters{display:flex;flex-wrap:wrap;gap:6px 24px}
+.chip{font:inherit;font-family:var(--mono);font-size:13px;letter-spacing:.06em;border:0;background:none;color:var(--muted);padding:4px 0;cursor:pointer;border-bottom:1.5px solid transparent}
+.chip[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.chip .n{color:var(--accent);margin-left:4px}
+.sort{font:inherit;font-family:var(--mono);font-size:12.5px;color:var(--ink);background:var(--paper);border:1px solid var(--line);padding:5px 8px}
+.chip:focus-visible,.cart:focus-visible,.sort:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:96px 48px}
+.card{display:flex;flex-direction:column;min-width:0}
+.img{position:relative;aspect-ratio:1/1;max-width:100%;background:var(--ph);display:grid;place-items:center;overflow:hidden}
+.img svg{width:54%;height:auto}
+.img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.code{position:absolute;left:10px;bottom:10px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;background:var(--paper);color:var(--ink);padding:2px 7px}
+.made{position:absolute;right:10px;bottom:10px;font-size:11px;letter-spacing:.06em;background:var(--ink);color:var(--paper);padding:2px 7px}
+.body{display:flex;flex-direction:column;gap:8px;padding-top:20px;flex:1}
+.meta{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+h2{font-weight:700;font-size:16px;line-height:1.45;margin:0;text-wrap:balance}
+.desc{color:var(--muted);font-size:13.5px;margin:0;flex:1}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:8px}
+.price{font-family:var(--mono);font-size:15px;font-variant-numeric:tabular-nums}
+.cart{flex:none;display:grid;place-items:center;width:42px;height:42px;background:var(--btn);color:var(--btn-ink);text-decoration:none}
+.cart svg{width:20px;height:20px}
+.cart:hover{opacity:.85}
+.promo{background:var(--ink);color:var(--bg);text-align:center;font-size:13px;letter-spacing:.08em;padding-block:9px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.promo b{font-weight:700;margin-right:10px;padding-right:10px;border-right:1px solid currentColor}
+.na{padding-block:64px 8px}
+.na-title{text-align:center;font-weight:500;font-size:clamp(24px,3vw,32px);letter-spacing:.04em;margin:0 0 6px}
+.na-sub{text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin:0 0 36px;text-transform:uppercase}
+.na-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.na-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;min-width:0}
+.na-card .img{width:100%}
+.na-card .badge{position:absolute;left:0;top:0;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:4px 9px}
+.na-card h3{font-weight:500;font-size:15px;margin:14px 0 0;line-height:1.5}
+.na-card .foot{justify-content:center;gap:16px;margin-top:4px}
+.na-card .price{font-weight:500}
+.imglink{display:grid;place-items:center;width:100%;height:100%}
+.imglink svg{width:54%;height:auto}
+.pricebox{display:grid;gap:2px}
+.sold{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.slides{display:flex;width:100%;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.slides::-webkit-scrollbar{display:none}
+.slides img{flex:0 0 100%;scroll-snap-align:start}
+.dots{position:absolute;left:0;right:0;top:10px;display:flex;justify-content:center;gap:5px;pointer-events:none}
+.dots i{width:5px;height:5px;border-radius:50%;background:var(--paper);opacity:.45}
+.dots i.on{opacity:1}
+.nav{position:absolute;top:50%;translate:0 -50%;width:34px;height:34px;display:grid;place-items:center;border:0;background:var(--paper);color:var(--ink);cursor:pointer;opacity:0;transition:opacity .2s}
+.nav.prev{left:8px}.nav.next{right:8px}
+.img:hover .nav,.nav:focus-visible{opacity:.92}
+@media (hover:none){.nav{display:none}}
+footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);display:grid;gap:4px}
+
+@media (max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:80px 36px}}
+@media (max-width:720px){.na-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding-bottom:6px}.na-card{flex:0 0 72%;scroll-snap-align:start}.promo{font-size:12px}.hero img{height:auto;aspect-ratio:4/5}.lead{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 18px}h2{font-size:14.5px}.desc{display:none}.cart{width:38px;height:38px}}
+@media (prefers-reduced-motion:no-preference){.card:hover .img img{transform:scale(1.03)}}
+@media (prefers-reduced-motion:reduce){.img img{transition:none}}
+</style>
+</head>
+<body>
+
+
+<div class="promo" role="note"><b>期間限定</b>滿 $2,200 送東京來回機票刮刮卡</div>
+
+<section class="hero">
+  <img src="img/hero.jpg" alt="Casual Archive 設計手稿">
+</section>
+
+<div class="wrap">
+  <section class="lead">
+    <div>
+      <div class="eyebrow">Select Shop · 37 Items</div>
+      <h1>日常選物所</h1>
+    </div>
+    <div class="copy">
+      <p class="main">這一期整理台灣品牌『開久 CASUAL SELECT』，把日常做得好看一點，專注在看似普通，卻真實能穿久的東西。</p>
+      <p class="note">本網站僅做推薦，實際售價、優惠、尺寸與庫存以蝦皮頁面為準。</p>
+    </div>
+  </section>
+
+  <section class="na" aria-labelledby="na-title">
+    <h2 class="na-title" id="na-title">New Arrival</h2>
+    <p class="na-sub">主推新品</p>
+    <div class="na-row" id="na"></div>
+  </section>
+
+  <div class="bar">
+    <nav class="filters" id="filters" aria-label="商品分類"></nav>
+    <select class="sort" id="sort" aria-label="排序">
+      <option value="pick">選品順序</option>
+      <option value="low">價格低到高</option>
+      <option value="high">價格高到低</option>
+    </select>
+  </div>
+  <main class="grid" id="grid"></main>
+
+  <footer>
+    <span>本站連結為蝦皮分潤連結，透過連結購買不會增加你的花費，我會獲得少量回饋。</span>
+    <span>本站僅作選品推薦，價格為 2026 年 10 月整理時的蝦皮售價，實際售價、優惠、尺寸與庫存以蝦皮頁面為準。</span>
+  </footer>
+</div>
+
+<script>
+/* ====== 商品清單 ======
+   code 型號｜cat 分類｜icon 示意圖｜made 開久自家製造｜img 商品照片（上傳後填入）｜link 蝦皮分潤連結 */
+const products = [
+  {code:"J38",  name:"輕防曬連帽外套", cat:"外套", icon:"jacket", price:1280, desc:"輕薄尼龍布料，防潑水，雙拉鍊，換季帶著走剛好。", link:"https://s.shopee.tw/W7mKrSYtE"},
+  {code:"CJ02", name:"Boxy Zipped Hoodie 短版連帽外套", cat:"外套", icon:"zip", price:1330, made:1, desc:"短版 Boxy 輪廓的拉鍊帽外套，刷毛內裡夠保暖。", link:"https://s.shopee.tw/4Vdv6GlFcH"},
+  {code:"J33",  name:"刷毛雙拉鏈連帽外套", cat:"外套", icon:"zip", price:1530, desc:"純棉刷毛加雙拉鍊，三色可選，秋冬主力外套。", link:"https://s.shopee.tw/1qd9vNhO3p"},
+
+  {code:"J39",  name:"紋理立領拉鏈夾克", cat:"外套", icon:"jacket", price:1330, desc:"立領加長拉鍊，紋理尼龍布料防潑水，秋天單穿剛好。", link:"https://s.shopee.tw/5VWSLq2FYw"},
+
+  {code:"A011", name:"寬短袖身素踢", cat:"上身", icon:"tee", price:480, made:1, desc:"285G 厚磅純棉，寬身短版的 Boxy 剪裁，素色最好搭。", link:"https://s.shopee.tw/30p7JAFSAY"},
+  {code:"T-10", name:"螺紋針織背心", cat:"上身", icon:"tank", price:380, desc:"300G 重磅純棉螺紋，單穿或疊在襯衫裡都可以。", link:"https://s.shopee.tw/5VWSHoDamx"},
+  {code:"CT26", name:"Muscle Fit 短衫", cat:"上身", icon:"tee", price:490, made:1, desc:"有彈性的合身版型，想穿修身一點就選這件。", link:"https://s.shopee.tw/qkcjIqyj0"},
+  {code:"T-59", name:"針織羅紋短袖 Polo", cat:"上身", icon:"polo", price:690, desc:"萊賽爾羅紋針織，亨利領，帶一點復古味。", link:"https://s.shopee.tw/4LKUtkBcAK"},
+  {code:"T-64", name:"條紋針織短袖", cat:"上身", icon:"tee", price:580, desc:"棉質混紡的條紋針織，圓領，配寬褲很順。", link:"https://s.shopee.tw/7VHWfb9CUr"},
+  {code:"T-62", name:"橫紋理針織短袖", cat:"上身", icon:"polo", price:680, desc:"橫向紋理加亨利領，比素 T 正式一點。", link:"https://s.shopee.tw/6q1psR5aOD"},
+  {code:"T-67", name:"針織紋理打底衫", cat:"上身", icon:"long", price:690, desc:"薄款長袖針織，秋冬當內搭打底最實用。", link:"https://s.shopee.tw/4Vdv69wG8Z"},
+  {code:"T-22", name:"側口袋 Boxy 衛衣", cat:"上身", icon:"long", price:760, desc:"500G 重磅大學 T，寬短版型，側邊多了口袋。", link:"https://s.shopee.tw/5fpsUJwMbV"},
+  {code:"T-60", name:"紋理刺繡條紋襯衫", cat:"上身", icon:"shirt", price:750, desc:"條紋加刺繡細節，敞開當罩衫做層次。", link:"https://s.shopee.tw/3g4o6ecy8T"},
+  {code:"T-23", name:"立體素面帽踢", cat:"上身", icon:"hoodie", price:799, desc:"重磅抓絨帽 T，寬鬆素面，冬天穿很暖。", link:"https://s.shopee.tw/AKbi2udqmD"},
+  {code:"T-44", name:"紋理針織套衫", cat:"上身", icon:"long", price:680, desc:"四色可選的寬鬆紋理針織，內搭外穿都行。", link:"https://s.shopee.tw/9APkenuovW"},
+  {code:"CD07", name:"NODE TEE", cat:"上身", icon:"tee", price:760, made:1, desc:"開久製造的圖 T，酵洗純棉，穿起來軟。", link:"https://s.shopee.tw/50aBh9wwSo"},
+  {code:"T-17", name:"Oversize 水洗帽踢", cat:"上身", icon:"hoodie", price:775, desc:"水洗純棉重磅，落肩寬鬆，帶口袋。", link:"https://s.shopee.tw/80DnGgTWCd"},
+  {code:"CD09", name:"WALKING MAN BIG PRINT LONG SLEEVE", cat:"上身", icon:"long", price:980, made:1, desc:"開久製造的大圖印花薄長袖，100% 純棉。", link:"https://s.shopee.tw/8pmuGDqkEV"},
+  {code:"CT05", name:"BOXY 短版帽T", cat:"上身", icon:"hoodie", price:890, desc:"寬短 Boxy 帽 T，配高腰寬褲比例最好。", link:"https://s.shopee.tw/1BVk1Nyc5"},
+  {code:"T-43", name:"層次磨邊打底長袖", cat:"上身", icon:"long", price:680, desc:"磨邊刷破細節的純棉薄長袖，打底很有層次。", link:"https://s.shopee.tw/AKbi31EkW3"},
+
+  {code:"L91",  name:"細條紋打褶西裝褲", cat:"下身", icon:"pants", price:980, desc:"細條紋加打褶，寬鬆落地版型，蝦皮上賣超過四千件。", link:"https://s.shopee.tw/2gCGuZmUWW"},
+  {code:"L-03", name:"抽繩打褶立體棉褲", cat:"下身", icon:"pants", price:890, desc:"抽繩腰頭加打褶，寬版棉褲穿起來放鬆又有型。", link:"https://s.shopee.tw/4qGlUZiJ82"},
+  {code:"A014", name:"彎刀西裝落地褲", cat:"下身", icon:"pants", price:980, made:1, desc:"彎刀褲型修飾腿型，西裝布料的落地長度。", link:"https://s.shopee.tw/LoM8Jyxx6"},
+  {code:"L83",  name:"打褶剪裁闊腿褲", cat:"下身", icon:"pants", price:880, desc:"100% 純棉，打褶闊腿，低飽和色好配色。", link:"https://s.shopee.tw/2BG0JhIw1b"},
+  {code:"L99",  name:"淺灰杏打褶落地褲", cat:"下身", icon:"pants", price:890, desc:"淺灰杏色的打褶落地褲，日系工作褲的味道。", link:"https://s.shopee.tw/2qVh6vnfbU"},
+  {code:"L-01", name:"打褶西裝落地褲", cat:"下身", icon:"pants", price:890, desc:"黑色打褶西裝落地褲，正式休閒都撐得住。", link:"https://s.shopee.tw/2gCGueg0GK"},
+  {code:"L-07", name:"原牛多裁線寬褲", cat:"下身", icon:"pants", price:980, desc:"原色丹寧加多道裁線，Baggy 寬版牛仔褲。", link:"https://s.shopee.tw/1142vbLowb"},
+  {code:"CL05", name:"多褶落地西裝褲", cat:"下身", icon:"pants", price:980, desc:"多道褶線撐出彎刀輪廓的落地西裝褲。", link:"https://s.shopee.tw/1BVjmylV4"},
+  {code:"L80",  name:"流線剪裁彎刀褲", cat:"下身", icon:"pants", price:890, desc:"復古水洗牛仔，流線彎刀剪裁。", link:"https://s.shopee.tw/4B14hSV1cG"},
+  {code:"L22",  name:"落地燈籠褲", cat:"下身", icon:"pants", price:880, desc:"高磅數布料，繭形燈籠褲型，垂墜感好。", link:"https://s.shopee.tw/60SispoRbo"},
+  {code:"CS04", name:"寬鬆雙褶工作短褲", cat:"下身", icon:"shorts", price:850, desc:"雙褶寬版的六分短褲，配中高筒襪剛好。", link:"https://s.shopee.tw/qkcjMLBQm"},
+  {code:"L84",  name:"丹寧落地寬褲", cat:"下身", icon:"pants", price:980, desc:"繭形收口的落地丹寧，復古水洗色。", link:"https://s.shopee.tw/LoM8RrTKr"},
+  {code:"CL01", name:"立體廓形西裝闊腿褲", cat:"下身", icon:"pants", price:980, desc:"立體廓形的西裝闊腿褲，黑色最百搭。", link:"https://s.shopee.tw/6Am95CHG3v"},
+  {code:"CL02", name:"立體紋理西裝闊腿褲", cat:"下身", icon:"pants", price:980, desc:"立體紋理布料，彎月版型的落地寬褲。", link:"https://s.shopee.tw/4B14has3Ql"},
+
+  {code:"CH02", name:"雙色層次針織冷帽", cat:"配件", icon:"beanie", price:760, made:1, desc:"雙色層次的針織毛帽，有兩種尺寸可選。", link:"https://s.shopee.tw/3g4o6hgV5m"},
+  {code:"CB01", name:"Clipped Cargo Tote", cat:"配件", icon:"bag", price:1120, desc:"重磅布料加金屬消防釦的工裝托特包，耐用又有細節。", link:"https://s.shopee.tw/9fM1JWb3sp"},
+  {code:"A04",  name:"純棉長襪", cat:"配件", icon:"sock", price:60, desc:"中筒素色棉襪，無骨縫線，便宜又耐穿。", link:"https://s.shopee.tw/1142vWJmha"},
+];
+
+const newArrivals = [
+  {code:"CD09", name:"CD09 WALKING MAN BIG PRINT LONG SLEEVE", price:980, link:"https://s.shopee.tw/70LG8W3Ipx"},
+  {code:"J39",  name:"J39 紋理立領拉鏈夾克", price:1330, link:"https://s.shopee.tw/5VWSLq2FYw"},
+  {code:"CB01", name:"CB01 Clipped Cargo Tote", price:1120, link:"https://s.shopee.tw/9fM1JWb3sp"},
+];
+const icons = {
+  jacket:'<path d="M34 16l16 8 16-8 20 10-6 22-10-4v40H30V44l-10 4-6-22z"/><path d="M50 24v60" fill="none" stroke="var(--ph)" stroke-width="2"/>',
+  zip:'<path d="M38 12a12 10 0 0 1 24 0l24 14-6 22-10-4v40H30V44l-10 4-6-22z"/><path d="M50 22v62" fill="none" stroke="var(--ph)" stroke-width="2"/>',
+  hoodie:'<path d="M38 12a12 10 0 0 1 24 0l24 14-6 22-10-4v40H30V44l-10 4-6-22z"/><rect x="38" y="60" width="24" height="12" fill="var(--ph)"/>',
+  tee:'<path d="M36 18c4 6 24 6 28 0l22 10-7 16-11-5v45H32V39l-11 5-7-16z"/>',
+  long:'<path d="M36 16c4 6 24 6 28 0l18 8 6 50-10 2-6-34v42H28V42l-6 34-10-2 6-50z"/>',
+  polo:'<path d="M36 18l14 6 14-6 22 10-7 16-11-5v45H32V39l-11 5-7-16z"/><path d="M50 24v14" fill="none" stroke="var(--ph)" stroke-width="2.5"/>',
+  tank:'<path d="M36 14h6c0 10 16 10 16 0h6c0 10 4 16 10 20v52H26V34c6-4 10-10 10-20z"/>',
+  shirt:'<path d="M36 18l14 10 14-10 22 10-7 16-11-5v45H32V39l-11 5-7-16z"/><path d="M50 28v56M42 18l8 10 8-10" fill="none" stroke="var(--ph)" stroke-width="2"/>',
+  pants:'<path d="M30 12h40l6 76H56L50 40l-6 48H24z"/>',
+  shorts:'<path d="M28 20h44l8 52H56l-6-28-6 28H20z"/>',
+  beanie:'<path d="M24 66a26 30 0 0 1 52 0z"/><rect x="22" y="64" width="56" height="14" rx="3"/>',
+  bag:'<path d="M20 38h60l-4 48H24z"/><path d="M36 38v-8a14 14 0 0 1 28 0v8" fill="none" stroke="var(--ph-ink)" stroke-width="5"/>',
+  sock:'<path d="M38 14h22v46l18 12a9 9 0 0 1-6 16H48a10 10 0 0 1-10-10z"/>'
+};
+const art = k => `<svg viewBox="0 0 100 100" aria-hidden="true" fill="var(--ph-ink)" stroke-linejoin="round">${icons[k]||icons.tee}</svg>`;
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt = n => "NT$ " + n.toLocaleString("en-US");
+
+const picks = ["J39","CT26","T-59","T-67","T-17","CD09","L91","CL05","L84","CH02"];
+const cats = ["版主推薦","外套","上身","下身","配件","開久製造","全部"];
+let current = "版主推薦", sort = "pick";
+const filters = document.getElementById("filters"), grid = document.getElementById("grid"), sortEl = document.getElementById("sort");
+const match = (p,c) => c==="全部" || (c==="版主推薦" ? picks.includes(p.code) : c==="開久製造" ? p.made : p.cat===c);
+
+function renderFilters(){
+  filters.innerHTML = cats.map(c=>`<button class="chip" id="cat-${esc(c)}" aria-pressed="${c===current}">${esc(c)}<span class="n">${products.filter(p=>match(p,c)).length}</span></button>`).join("");
+  filters.querySelectorAll(".chip").forEach((b,i)=>b.onclick=()=>{current=cats[i];renderFilters();renderGrid()});
+}
+const link = (p,inner) => `<a class="imglink" href="${esc(p.link)}" target="_blank" rel="sponsored noopener" tabindex="-1">${inner}</a>`;
+function gallery(p){
+  const n = p.n || 1, alt = esc(p.code+' '+p.name);
+  if(n===1) return link(p,`<img src="img/${esc(p.code)}.jpg" alt="${alt}" loading="lazy" onerror="this.replaceWith(document.createRange().createContextualFragment(art('${p.icon}')))">`);
+  const src = i => `img/${esc(p.code)}${i?'-'+(i+1):''}.jpg`;
+  return `${link(p,`<div class="slides">${Array.from({length:n},(_,i)=>`<img src="${src(i)}" alt="${alt} 第 ${i+1} 張" loading="lazy">`).join("")}</div>`)}
+    <div class="dots" aria-hidden="true">${Array.from({length:n},(_,i)=>`<i class="${i?'':'on'}"></i>`).join("")}</div>
+    <button class="nav prev" aria-label="上一張">‹</button><button class="nav next" aria-label="下一張">›</button>`;
+}
+function bindGalleries(root){
+  root.querySelectorAll(".slides").forEach(sl=>{
+    const box = sl.closest(".img"), dots = box.querySelectorAll(".dots i");
+    const idx = () => Math.round(sl.scrollLeft / sl.clientWidth);
+    sl.addEventListener("scroll",()=>{const k=idx();dots.forEach((d,i)=>d.classList.toggle("on",i===k))},{passive:true});
+    box.querySelector(".prev").onclick=()=>sl.scrollTo({left:(idx()-1)*sl.clientWidth,behavior:"smooth"});
+    box.querySelector(".next").onclick=()=>sl.scrollTo({left:((idx()+1)%dots.length)*sl.clientWidth,behavior:"smooth"});
+  });
+}
+function renderGrid(){
+  let list = products.filter(p=>match(p,current));
+  if(current==="版主推薦" && sort==="pick") list=[...list].sort((a,b)=>picks.indexOf(a.code)-picks.indexOf(b.code));
+  if(sort==="low") list=[...list].sort((a,b)=>a.price-b.price);
+  if(sort==="high") list=[...list].sort((a,b)=>b.price-a.price);
+  grid.innerHTML = list.map(p=>`
+    <article class="card">
+      <div class="img">${gallery(p)}<span class="code">${esc(p.code)}</span>${p.made?'<span class="made">開久製造</span>':""}</div>
+      <div class="body">
+        <div class="meta">Casual Select · ${esc(p.cat)}</div>
+        <h2>${esc(p.name)}</h2>
+        <p class="desc">${esc(p.desc)}</p>
+        <div class="foot">
+          <div class="pricebox"><div class="price">${fmt(p.price)}</div>${p.sold?`<div class="sold">蝦皮已售出 ${esc(p.sold)}</div>`:""}</div>
+          <a class="cart" href="${esc(p.link)}" target="_blank" rel="sponsored noopener" aria-label="到蝦皮購買 ${esc(p.name)}" title="到蝦皮購買"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.3l2-8H6.4"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="16.5" cy="19" r="1.4"/></svg></a>
+        </div>
+      </div>
+    </article>`).join("");
+  bindGalleries(grid);
+}
+sortEl.onchange = () => { sort = sortEl.value; renderGrid(); };
+document.getElementById("na").innerHTML = newArrivals.map(p=>`
+  <article class="na-card">
+    <a class="img" href="${esc(p.link)}" target="_blank" rel="sponsored noopener" tabindex="-1" aria-hidden="true"><img src="img/${esc(p.code)}.jpg" alt="" loading="lazy"><span class="badge">NEW</span></a>
+    <h3>${esc(p.name)}</h3>
+    <div class="foot"><span class="price">${fmt(p.price)}</span><a class="cart" href="${esc(p.link)}" target="_blank" rel="sponsored noopener" aria-label="到蝦皮購買 ${esc(p.name)}" title="到蝦皮購買"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.3l2-8H6.4"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="16.5" cy="19" r="1.4"/></svg></a></div>
+  </article>`).join("");
+renderFilters(); renderGrid();
+
+// 點擊統計：每次點到蝦皮連結，送一筆事件給 Google Analytics
+document.addEventListener("click",e=>{
+  const a=e.target.closest('a[rel~="sponsored"]'); if(!a||typeof gtag!=="function") return;
+  const card=a.closest(".card,.na-card"), code=card&&card.querySelector(".code");
+  const name=card&&card.querySelector("h2,h3");
+  gtag("event","shopee_click",{
+    item_code: code?code.textContent:"",
+    item_name: name?name.textContent:"",
+    area: a.closest(".na-card")?"new_arrival":"list",
+    tab: typeof current!=="undefined"?current:"",
+    link_type: a.classList.contains("cart")?"cart_button":"image",
+    transport_type:"beacon"
+  });
+});
+</script>
+
+</body>
+</html>
