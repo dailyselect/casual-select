@@ -10,4 +10,4 @@
 點擊蝦皮連結會送出 `shopee_click` 事件，附帶 item_code、item_name、area、tab、link_type。
 
 ## 社群預覽圖
-把 `https://gtr05457.github.io/casual-select/` 換成網站網址，例如 `https://你的帳號.github.io/repo名稱/`。
+把 `https://dailyselect.github.io/casual-select/` 換成網站網址，例如 `https://你的帳號.github.io/repo名稱/`。
