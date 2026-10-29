@@ -22,20 +22,12 @@ gtag('js',new Date());gtag('config','G-JE8Q86BKDQ');
 <style>
 /* Layout: 滿版四聯拍首圖 → 置左文案 → 一行四件、寬留白的商品格；低彩度灰階 */
 :root{
-  --bg:#ecebe8; --paper:#f7f6f4; --ink:#1b1c1d; --muted:#6a6b6c; --line:#d3d1cc;
+  --bg:#ffffff; --paper:#ffffff; --ink:#1b1c1d; --muted:#6a6b6c; --line:#e4e4e2;
   --accent:#8a7a63; --btn:#1b1c1d; --btn-ink:#f7f6f4;
-  --ph:#dcdad5; --ph-ink:#3a3b3c; --sale:#b23a22;
+  --ph:#f3f3f2; --ph-ink:#3a3b3c; --sale:#b23a22;
   --body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#151616; --paper:#1d1e1f; --ink:#e9e8e5; --muted:#9a9a98; --line:#2f3031;
-  --accent:#b8a689; --btn:#e9e8e5; --btn-ink:#151616;
-  --ph:#262728; --ph-ink:#bdbcb8; --sale:#e8735a; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#151616; --paper:#1d1e1f; --ink:#e9e8e5; --muted:#9a9a98; --line:#2f3031;
-  --accent:#b8a689; --btn:#e9e8e5; --btn-ink:#151616;
-  --ph:#262728; --ph-ink:#bdbcb8; --sale:#e8735a; color-scheme:dark}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7}
 
 .hero{background:var(--ph)}
@@ -125,7 +117,7 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
 <div class="wrap">
   <section class="lead">
     <div>
-      <div class="eyebrow">Select Shop · 37 Items</div>
+      <div class="eyebrow">Select Shop · 44 Items</div>
       <h1>日常選物所</h1>
     </div>
     <div class="copy">
@@ -201,6 +193,14 @@ const products = [
   {code:"CH02", n:4, name:"雙色層次針織冷帽", cat:"配件", icon:"beanie", price:760, made:1, desc:"雙色層次的針織毛帽，有兩種尺寸可選。", sold:"48", link:"https://s.shopee.tw/3g4o6hgV5m"},
   {code:"CB01", n:4, name:"Clipped Cargo Tote", cat:"配件", icon:"bag", price:1120, desc:"重磅布料加金屬消防釦的工裝托特包，耐用又有細節。", sold:"12", link:"https://s.shopee.tw/9fM1JWb3sp"},
   {code:"A04", n:4,  name:"純棉長襪", cat:"配件", icon:"sock", price:60, desc:"中筒素色棉襪，無骨縫線，便宜又耐穿。", sold:"1萬+", link:"https://s.shopee.tw/1142vWJmha"},
+
+  {code:"S01", label:"20SS", brand:"20SS", name:"CLEANFIT 雙口袋長袖襯衫", cat:"上身", icon:"shirt", n:4, price:450, orig:880, off:"5.1折", sold:"22", desc:"雙口袋加短寬版型，素面好搭，單穿或當外搭都可以。", link:"https://s.shopee.tw/9KjCKsaz8w"},
+  {code:"S02", label:"20SS", brand:"20SS", name:"亨利領肌理感長袖上衣", cat:"上身", icon:"long", n:4, price:439, orig:1080, off:"4.1折", sold:"1", desc:"坑條肌理加亨利領，比素 T 多一點細節。", link:"https://s.shopee.tw/2BG1nkIe84"},
+  {code:"S03", label:"20SS", brand:"20SS", name:"漸層格紋短寬長袖襯衫", cat:"上身", icon:"shirt", n:4, price:679, orig:1280, off:"5.3折", sold:"3", desc:"黑白漸層格紋、短寬版型，敞開穿層次更明顯。", link:"https://s.shopee.tw/40hfz7gXA2"},
+  {code:"S04", label:"20SS", brand:"20SS", name:"歐美復古皮帶", cat:"配件", icon:"bag", n:4, price:299, orig:699, off:"4.3折", sold:"1", desc:"復古雕花扣頭，配寬褲或牛仔褲都壓得住。", link:"https://s.shopee.tw/1BNUbvQNdN"},
+  {code:"S05", label:"20SS", brand:"20SS", name:"Cleanfit Boxy 短版連帽皮外套", cat:"外套", icon:"zip", n:4, price:750, orig:1980, off:"3.8折", sold:"4", desc:"短版 Boxy 皮外套加連帽，落肩寬鬆，配寬褲比例好。", link:"https://s.shopee.tw/4qGmyfh9QE"},
+  {code:"S06", label:"20SS", brand:"20SS", name:"立領 Boxy 短寬水洗外套", cat:"外套", icon:"jacket", n:4, price:1230, sold:"5", desc:"立領短寬版型，刷舊水洗質感，秋冬好穿。", link:"https://s.shopee.tw/1BNUbwKCZs"},
+  {code:"S07", label:"20SS", brand:"20SS", name:"線條拼接風衣外套", cat:"外套", icon:"jacket", n:4, price:699, orig:1280, off:"5.5折", sold:"1", desc:"防風、防潑水，線條拼接設計，騎車穿也實用。", link:"https://s.shopee.tw/20wbbTrsQO"},
 ];
 
 const newArrivals = [
@@ -228,10 +228,10 @@ const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&g
 const fmt = n => "NT$ " + n.toLocaleString("en-US");
 
 const picks = ["J39","CT26","T-59","T-67","T-17","CD09","L91","CL05","L84","CH02"];
-const cats = ["版主推薦","外套","上身","下身","配件","開久製造","全部"];
+const cats = ["版主推薦","外套","上身","下身","配件","開久製造","20SS","全部"];
 let current = "版主推薦", sort = "pick";
 const filters = document.getElementById("filters"), grid = document.getElementById("grid"), sortEl = document.getElementById("sort");
-const match = (p,c) => c==="全部" || (c==="版主推薦" ? picks.includes(p.code) : c==="開久製造" ? p.made : p.cat===c);
+const match = (p,c) => c==="全部" || (c==="版主推薦" ? picks.includes(p.code) : c==="開久製造" ? p.made : c==="20SS" ? p.brand==="20SS" : p.cat===c);
 
 function renderFilters(){
   filters.innerHTML = cats.map(c=>`<button class="chip" id="cat-${esc(c)}" aria-pressed="${c===current}">${esc(c)}<span class="n">${products.filter(p=>match(p,c)).length}</span></button>`).join("");
@@ -262,9 +262,9 @@ function renderGrid(){
   if(sort==="high") list=[...list].sort((a,b)=>b.price-a.price);
   grid.innerHTML = list.map(p=>`
     <article class="card">
-      <div class="img">${gallery(p)}<span class="code">${esc(p.code)}</span>${p.made?'<span class="made">開久製造</span>':""}</div>
+      <div class="img">${gallery(p)}<span class="code">${esc(p.label||p.code)}</span>${p.made?'<span class="made">開久製造</span>':""}</div>
       <div class="body">
-        <div class="meta">Casual Select · ${esc(p.cat)}</div>
+        <div class="meta">${esc(p.brand||"Casual Select")} · ${esc(p.cat)}</div>
         <h2>${esc(p.name)}</h2>
         <p class="desc">${esc(p.desc)}</p>
         <div class="foot">
