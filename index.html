@@ -80,6 +80,10 @@ h2{font-weight:700;font-size:16px;line-height:1.45;margin:0;text-wrap:balance}
 .na-card .price{font-weight:500}
 .imglink{display:grid;place-items:center;width:100%;height:100%}
 .imglink svg{width:54%;height:auto}
+.group-head{grid-column:1/-1;display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--ink);padding-bottom:12px;margin-bottom:-56px}
+.group-head:not(:first-child){margin-top:40px}
+.group-head h3{margin:0;font-size:clamp(24px,3vw,32px);font-weight:500;letter-spacing:.04em}
+.group-head span{font-size:13px;color:var(--muted);letter-spacing:.08em}
 .pricebox{display:grid;gap:2px}
 .pricebox .was{min-height:18px;line-height:18px;font-size:12px;display:flex;align-items:center;gap:6px;white-space:nowrap}
 .pricebox .orig{color:var(--muted);font-family:var(--mono);text-decoration-thickness:1px}
@@ -100,7 +104,7 @@ h2{font-weight:700;font-size:16px;line-height:1.45;margin:0;text-wrap:balance}
 footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);display:grid;gap:4px}
 
 @media (max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:80px 36px}}
-@media (max-width:720px){.na-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding-bottom:6px}.na-card{flex:0 0 72%;scroll-snap-align:start}.promo{font-size:12px}.hero img{height:auto;aspect-ratio:4/5;max-height:none}.lead{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 18px}h2{font-size:14.5px}.desc{display:none}.cart{width:38px;height:38px}}
+@media (max-width:720px){.group-head{margin-bottom:-28px}.na-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding-bottom:6px}.na-card{flex:0 0 72%;scroll-snap-align:start}.promo{font-size:12px}.hero img{height:auto;aspect-ratio:4/5;max-height:none}.lead{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 18px}h2{font-size:14.5px}.desc{display:none}.cart{width:38px;height:38px}}
 @media (prefers-reduced-motion:no-preference){.card:hover .img img{transform:scale(1.03)}}
 @media (prefers-reduced-motion:reduce){.img img{transition:none}}
 </style>
@@ -227,11 +231,15 @@ const art = k => `<svg viewBox="0 0 100 100" aria-hidden="true" fill="var(--ph-i
 const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmt = n => "NT$ " + n.toLocaleString("en-US");
 
-const picks = ["J39","CT26","T-59","T-67","T-17","CD09","L91","CL05","L84","CH02"];
-const cats = ["版主推薦","外套","上身","下身","配件","開久製造","20SS","全部"];
-let current = "版主推薦", sort = "pick";
+const pickGroups = [
+  {title:"Casual Select", sub:"開久", codes:["J39","T-67","CD09","L91","CL05","L84"]},
+  {title:"20SS", sub:"韓系選物", codes:["S01","S02","S03","S05","S07","S06"]},
+];
+const picks = pickGroups.flatMap(g=>g.codes);
+const cats = ["日常精選","外套","上身","下身","配件","開久製造","20SS","全部"];
+let current = "日常精選", sort = "pick";
 const filters = document.getElementById("filters"), grid = document.getElementById("grid"), sortEl = document.getElementById("sort");
-const match = (p,c) => c==="全部" || (c==="版主推薦" ? picks.includes(p.code) : c==="開久製造" ? p.made : c==="20SS" ? p.brand==="20SS" : p.cat===c);
+const match = (p,c) => c==="全部" || (c==="日常精選" ? picks.includes(p.code) : c==="開久製造" ? p.made : c==="20SS" ? p.brand==="20SS" : p.cat===c);
 
 function renderFilters(){
   filters.innerHTML = cats.map(c=>`<button class="chip" id="cat-${esc(c)}" aria-pressed="${c===current}">${esc(c)}<span class="n">${products.filter(p=>match(p,c)).length}</span></button>`).join("");
@@ -255,12 +263,7 @@ function bindGalleries(root){
     box.querySelector(".next").onclick=()=>sl.scrollTo({left:((idx()+1)%dots.length)*sl.clientWidth,behavior:"smooth"});
   });
 }
-function renderGrid(){
-  let list = products.filter(p=>match(p,current));
-  if(current==="版主推薦" && sort==="pick") list=[...list].sort((a,b)=>picks.indexOf(a.code)-picks.indexOf(b.code));
-  if(sort==="low") list=[...list].sort((a,b)=>a.price-b.price);
-  if(sort==="high") list=[...list].sort((a,b)=>b.price-a.price);
-  grid.innerHTML = list.map(p=>`
+const cardHTML = p=>`
     <article class="card">
       <div class="img">${gallery(p)}<span class="code">${esc(p.label||p.code)}</span>${p.made?'<span class="made">開久製造</span>':""}</div>
       <div class="body">
@@ -272,7 +275,18 @@ function renderGrid(){
           <a class="cart" href="${esc(p.link)}" target="_blank" rel="sponsored noopener" aria-label="到蝦皮購買 ${esc(p.name)}" title="到蝦皮購買"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.3l2-8H6.4"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="16.5" cy="19" r="1.4"/></svg></a>
         </div>
       </div>
-    </article>`).join("");
+    </article>`;
+function renderGrid(){
+  let list = products.filter(p=>match(p,current));
+  if(current==="日常精選" && sort==="pick") list=[...list].sort((a,b)=>picks.indexOf(a.code)-picks.indexOf(b.code));
+  if(sort==="low") list=[...list].sort((a,b)=>a.price-b.price);
+  if(sort==="high") list=[...list].sort((a,b)=>b.price-a.price);
+  const sorter = l => sort==="low"?[...l].sort((x,y)=>x.price-y.price):sort==="high"?[...l].sort((x,y)=>y.price-x.price):l;
+  if(current==="日常精選"){
+    grid.innerHTML = pickGroups.map(g=>`<div class="group-head"><h3>${esc(g.title)}</h3><span>${esc(g.sub)} · ${g.codes.length} 件</span></div>`+sorter(g.codes.map(c=>products.find(p=>p.code===c)).filter(Boolean)).map(cardHTML).join("")).join("");
+  } else {
+    grid.innerHTML = list.map(cardHTML).join("");
+  }
   bindGalleries(grid);
 }
 sortEl.onchange = () => { sort = sortEl.value; renderGrid(); };
