@@ -82,7 +82,7 @@ h2{font-weight:700;font-size:16px;line-height:1.45;margin:0;text-wrap:balance}
 .na-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
 .na-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;min-width:0}
 .na-card .img{width:100%}
-.na-card .badge{position:absolute;left:0;top:0;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:4px 9px}
+.na-card .badge{position:absolute;left:0;top:0;z-index:1;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:4px 9px}
 .na-card h3{font-weight:500;font-size:15px;margin:14px 0 0;line-height:1.5}
 .na-card .foot{justify-content:center;gap:16px;margin-top:4px}
 .na-card .price{font-weight:500}
@@ -276,10 +276,11 @@ function renderGrid(){
 sortEl.onchange = () => { sort = sortEl.value; renderGrid(); };
 document.getElementById("na").innerHTML = newArrivals.map(p=>`
   <article class="na-card">
-    <a class="img" href="${esc(p.link)}" target="_blank" rel="sponsored noopener" tabindex="-1" aria-hidden="true"><img src="img/${esc(p.code)}.jpg" alt="" loading="lazy"><span class="badge">NEW</span></a>
+    <div class="img">${gallery({...p,n:4,icon:"tee"})}<span class="badge">NEW</span></div>
     <h3>${esc(p.name)}</h3>
     <div class="foot"><span class="price">${fmt(p.price)}</span><a class="cart" href="${esc(p.link)}" target="_blank" rel="sponsored noopener" aria-label="到蝦皮購買 ${esc(p.name)}" title="到蝦皮購買"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.3l2-8H6.4"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="16.5" cy="19" r="1.4"/></svg></a></div>
   </article>`).join("");
+bindGalleries(document.getElementById("na"));
 renderFilters(); renderGrid();
 
 // 點擊統計：每次點到蝦皮連結，送一筆事件給 Google Analytics
