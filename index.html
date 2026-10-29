@@ -7,7 +7,7 @@
 <meta property="og:title" content="日常選物所｜開久 CASUAL SELECT">
 <meta property="og:description" content="把日常做得好看一點，專注在看似普通，卻真實能穿久的東西。">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://dailyselect.github.io/casual-select/img/hero.jpg">
+<meta property="og:image" content="https://dailyselect.github.io/casual-select/img/hero-wide.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JE8Q86BKDQ"></script>
@@ -39,7 +39,7 @@ gtag('js',new Date());gtag('config','G-JE8Q86BKDQ');
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7}
 
 .hero{background:var(--ph)}
-.hero img{display:block;width:100%;height:clamp(380px,62vw,760px);object-fit:cover;object-position:50% 24%}
+.hero img{display:block;width:100%;height:auto;aspect-ratio:2400/1484;max-height:900px;object-fit:cover;object-position:50% 50%}
 
 .wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:56px 72px}
 .lead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:24px 64px;align-items:end;padding-bottom:36px;border-bottom:1px solid var(--ink)}
@@ -108,7 +108,7 @@ h2{font-weight:700;font-size:16px;line-height:1.45;margin:0;text-wrap:balance}
 footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);display:grid;gap:4px}
 
 @media (max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:80px 36px}}
-@media (max-width:720px){.na-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding-bottom:6px}.na-card{flex:0 0 72%;scroll-snap-align:start}.promo{font-size:12px}.hero img{height:auto;aspect-ratio:4/5}.lead{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 18px}h2{font-size:14.5px}.desc{display:none}.cart{width:38px;height:38px}}
+@media (max-width:720px){.na-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding-bottom:6px}.na-card{flex:0 0 72%;scroll-snap-align:start}.promo{font-size:12px}.hero img{height:auto;aspect-ratio:4/5;max-height:none}.lead{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 18px}h2{font-size:14.5px}.desc{display:none}.cart{width:38px;height:38px}}
 @media (prefers-reduced-motion:no-preference){.card:hover .img img{transform:scale(1.03)}}
 @media (prefers-reduced-motion:reduce){.img img{transition:none}}
 </style>
@@ -119,7 +119,7 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
 <div class="promo" role="note"><b>期間限定</b>滿 $2,200 送東京來回機票刮刮卡</div>
 
 <section class="hero">
-  <img src="img/hero.jpg" alt="日常選物所 封面">
+  <picture><source media="(min-width:721px)" srcset="img/hero-wide.jpg"><img src="img/hero.jpg" alt="日常選物所 封面"></picture>
 </section>
 
 <div class="wrap">
