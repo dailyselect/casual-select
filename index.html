@@ -13,6 +13,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JE8Q86BKDQ"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+(function(){try{var q=new URLSearchParams(location.search).get('me');if(q==='1')localStorage.setItem('ds_internal','1');if(q==='0')localStorage.removeItem('ds_internal');if(localStorage.getItem('ds_internal')==='1'){window['ga-disable-G-JE8Q86BKDQ']=true;window.dsInternal=true;}}catch(e){}})();
 gtag('js',new Date());gtag('config','G-JE8Q86BKDQ');
 </script>
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
@@ -332,5 +333,6 @@ document.addEventListener("click",e=>{
 });
 </script>
 
+<script>if(window.dsInternal){var b=document.createElement("div");b.textContent="自己人模式：不計入 GA";b.style.cssText="position:fixed;left:12px;bottom:12px;z-index:9999;background:#1b1c1d;color:#fff;font:12px system-ui,sans-serif;padding:6px 10px;border-radius:999px;opacity:.85;pointer-events:none";document.body.appendChild(b)}</script>
 </body>
 </html>
