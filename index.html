@@ -130,7 +130,7 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
 <div class="wrap">
   <section class="lead">
     <div>
-      <div class="eyebrow">Select Shop · 44 Items</div>
+      <div class="eyebrow" id="itemcount">Select Shop · 53 Items</div>
       <h1>日常選物所</h1>
     </div>
     <div class="copy">
@@ -255,6 +255,7 @@ const pickGroups = [
   {title:"Algar選品", sub:"韓系男裝", codes:["AG01","AG03","AG05","AG07","AG10","AG08"]},
 ];
 const picks = pickGroups.flatMap(g=>g.codes);
+document.getElementById("itemcount").textContent="Select Shop · "+products.length+" Items";
 const cats = ["日常精選","外套","上身","下身","配件","開久製造","20SS","Algar選品","全部"];
 let current = "日常精選", sort = "pick";
 const filters = document.getElementById("filters"), grid = document.getElementById("grid"), sortEl = document.getElementById("sort");
