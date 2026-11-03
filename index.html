@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="日常選物所整理開久 CASUAL SELECT、20SS、Algar選品的韓系男裝，以及 Levi's 雙11 限定 $1590 牛仔褲與牛仔外套：外套、襯衫、針織、寬褲與配件，附蝦皮售價與銷量，挑耐看、好搭、能穿很久的日常單品。">
-<meta property="og:title" content="日常選物所｜開久 CASUAL SELECT × 20SS × Algar選品">
+<meta property="og:title" content="日常選物所｜開久 CASUAL SELECT × 20SS × Algar選品 × Levi's">
 <meta property="og:description" content="衣櫃裡最常穿的，往往不是最搶眼的那件。耐看、好搭、能陪你穿很久的日常單品。">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://dailyselect.github.io/casual-select/img/hero-wide.jpg">
@@ -17,7 +17,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
 gtag('js',new Date());gtag('config','G-JE8Q86BKDQ');
 </script>
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>日常選物所｜韓系男裝穿搭選物：開久 Casual Select、20SS、Algar選品</title>
+<title>日常選物所｜韓系男裝穿搭選物：開久 Casual Select、20SS、Algar選品、Levi's</title>
 <link rel="canonical" href="https://dailyselect.github.io/casual-select/">
 <meta property="og:url" content="https://dailyselect.github.io/casual-select/">
 <meta property="og:site_name" content="日常選物所 DAILY SELECT">
@@ -291,10 +291,10 @@ const pickGroups = [
 ];
 const picks = pickGroups.flatMap(g=>g.codes);
 document.getElementById("itemcount").textContent="Select Shop · "+products.length+" Items";
-const cats = ["本週主推","外套","上身","下身","配件","開久製造","20SS","Algar選品","Levi's","全部"];
+const cats = ["本週主推","外套","上身","下身","配件","開久Casual","20SS","Algar選品","Levi's","全部"];
 let current = "本週主推", sort = "pick";
 const filters = document.getElementById("filters"), grid = document.getElementById("grid"), sortEl = document.getElementById("sort");
-const match = (p,c) => c==="全部" || (c==="本週主推" ? picks.includes(p.code) : c==="開久製造" ? p.made : (c==="20SS"||c==="Algar選品"||c==="Levi's") ? p.brand===c : p.cat===c);
+const match = (p,c) => c==="全部" || (c==="本週主推" ? picks.includes(p.code) : c==="開久Casual" ? !p.brand : (c==="20SS"||c==="Algar選品"||c==="Levi's") ? p.brand===c : p.cat===c);
 
 function renderFilters(){
   filters.innerHTML = cats.map(c=>`<button class="chip" id="cat-${esc(c)}" aria-pressed="${c===current}">${esc(c)}<span class="n">${products.filter(p=>match(p,c)).length}</span></button>`).join("");
