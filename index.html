@@ -55,6 +55,13 @@ h1{font-weight:900;font-size:clamp(36px,6vw,60px);line-height:1.05;margin:8px 0 
 .chip[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink)}
 .chip .n{color:var(--accent);margin-left:4px}
 .sort{font:inherit;font-family:var(--mono);font-size:12.5px;color:var(--ink);background:var(--paper);border:1px solid var(--line);padding:5px 8px}
+.tools{display:flex;gap:10px;align-items:center}
+.search{font:inherit;font-size:14px;color:var(--ink);background:var(--paper);border:1px solid var(--line);padding:6px 12px;width:240px;border-radius:0;-webkit-appearance:none;appearance:none}
+.search:focus{outline:none;border-color:var(--ink)}
+.qinfo{font-family:var(--mono);font-size:13px;color:var(--muted);margin:-32px 0 32px}
+.qinfo button{font:inherit;border:0;background:none;color:var(--ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:0 0 0 10px}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:40px 0;font-size:15px}
+@media (max-width:720px){.tools{width:100%}.search{flex:1;width:auto;font-size:16px}}
 .plink{color:inherit;text-decoration:none}.plink:hover{text-decoration:underline;text-underline-offset:3px}
 .chip:focus-visible,.cart:focus-visible,.sort:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
@@ -143,12 +150,16 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
 
   <div class="bar">
     <nav class="filters" id="filters" aria-label="商品分類"></nav>
-    <select class="sort" id="sort" aria-label="排序">
-      <option value="pick">選品順序</option>
-      <option value="low">價格低到高</option>
-      <option value="high">價格高到低</option>
-    </select>
+    <div class="tools">
+      <input type="search" class="search" id="q" placeholder="搜尋商品：寬褲、牛仔、針織…" aria-label="搜尋商品" autocomplete="off" enterkeyhint="search">
+      <select class="sort" id="sort" aria-label="排序">
+        <option value="pick">選品順序</option>
+        <option value="low">價格低到高</option>
+        <option value="high">價格高到低</option>
+      </select>
+    </div>
   </div>
+  <p class="qinfo" id="qinfo" hidden></p>
   <main class="grid" id="grid"></main>
 
   <footer>
@@ -297,8 +308,8 @@ const filters = document.getElementById("filters"), grid = document.getElementBy
 const match = (p,c) => c==="全部" || (c==="本週主推" ? picks.includes(p.code) : c==="開久Casual" ? !p.brand : (c==="20SS"||c==="Algar選品"||c==="Levi's") ? p.brand===c : p.cat===c);
 
 function renderFilters(){
-  filters.innerHTML = cats.map(c=>`<button class="chip" id="cat-${esc(c)}" aria-pressed="${c===current}">${esc(c)}<span class="n">${products.filter(p=>match(p,c)).length}</span></button>`).join("");
-  filters.querySelectorAll(".chip").forEach((b,i)=>b.onclick=()=>{current=cats[i];renderFilters();renderGrid()});
+  filters.innerHTML = cats.map(c=>`<button class="chip" id="cat-${esc(c)}" aria-pressed="${c===current && !query}">${esc(c)}<span class="n">${products.filter(p=>match(p,c)).length}</span></button>`).join("");
+  filters.querySelectorAll(".chip").forEach((b,i)=>b.onclick=()=>{current=cats[i];if(query){query="";qEl.value="";try{const u=new URL(location.href);u.searchParams.delete("q");history.replaceState(null,"",u)}catch(e){}}renderFilters();renderGrid()});
 }
 const link = (p,inner) => `<a class="imglink" href="p/${encodeURIComponent(p.code)}.html" tabindex="-1" aria-label="${esc(p.name)} 商品頁">${inner}</a>`;
 function gallery(p){
@@ -331,8 +342,25 @@ const cardHTML = p=>`
         </div>
       </div>
     </article>`;
+const SYN=[["牛仔","丹寧","denim","jeans"],["外套","夾克","jacket"],["帽t","帽踢","連帽","hoodie"],["t恤","踢","tee","短袖"],["針織","毛衣","knit"],["褲","pants","長褲"],["襯衫","shirt"],["寬褲","闊腿","落地褲","寬版"],["黑","black"],["開久","casual select","casualselect"],["levi","levi's","levis","李維"]];
+const norm=t=>String(t||"").toLowerCase().replace(/[\uff01-\uff5e]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xfee0)).replace(/\s+/g," ").trim();
+const hay=p=>norm([p.name,p.desc,p.code,p.label,p.brand||"開久 Casual Select",p.cat,p.made?"開久製造":""].join(" "));
+const termOk=(h,t)=>h.includes(t)||SYN.some(a=>a.includes(t)&&a.some(x=>h.includes(x)));
+let query="";
+const qEl=document.getElementById("q"), qinfo=document.getElementById("qinfo");
+function searchList(){const terms=norm(query).split(" ").filter(Boolean);return products.filter(p=>{const h=hay(p);return terms.every(t=>termOk(h,t))})}
 function renderGrid(){
-  grid.classList.toggle("g3", current==="本週主推");
+  grid.classList.toggle("g3", current==="本週主推" && !query);
+  if(query){
+    let list=searchList();
+    if(sort==="low") list=[...list].sort((a,b)=>a.price-b.price);
+    if(sort==="high") list=[...list].sort((a,b)=>b.price-a.price);
+    qinfo.hidden=false;qinfo.innerHTML=`搜尋「${esc(query)}」找到 ${list.length} 件<button type="button" id="qclear">清除搜尋</button>`;
+    document.getElementById("qclear").onclick=()=>{qEl.value="";setQuery("")};
+    grid.innerHTML = list.length?list.map(cardHTML).join(""):`<p class="empty">沒有找到相關商品，換個關鍵字試試，例如「寬褲」「牛仔」「外套」。</p>`;
+    bindGalleries(grid);return;
+  }
+  qinfo.hidden=true;
   let list = products.filter(p=>match(p,current));
   if(current==="本週主推" && sort==="pick") list=[...list].sort((a,b)=>picks.indexOf(a.code)-picks.indexOf(b.code));
   if(sort==="low") list=[...list].sort((a,b)=>a.price-b.price);
@@ -346,6 +374,13 @@ function renderGrid(){
   bindGalleries(grid);
 }
 sortEl.onchange = () => { sort = sortEl.value; renderGrid(); };
+let qTimer;
+function setQuery(v){query=v.trim();try{const u=new URL(location.href);if(query)u.searchParams.set("q",query);else u.searchParams.delete("q");history.replaceState(null,"",u)}catch(e){}
+  filters.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-pressed",String(!query&&b.id==="cat-"+current)));renderGrid();
+  clearTimeout(qTimer);if(query&&typeof gtag==="function")qTimer=setTimeout(()=>gtag("event","search",{search_term:query}),1200)}
+qEl.addEventListener("input",()=>setQuery(qEl.value));
+qEl.addEventListener("keydown",e=>{if(e.key==="Enter"){qEl.blur()}});
+try{const q0=new URLSearchParams(location.search).get("q");if(q0){qEl.value=q0;query=q0.trim()}}catch(e){}
 renderFilters(); renderGrid();
 
 // 點擊統計：每次點到蝦皮連結，送一筆事件給 Google Analytics
