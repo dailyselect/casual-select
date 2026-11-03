@@ -139,12 +139,6 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
     </div>
   </section>
 
-  <section class="na" aria-labelledby="na-title">
-    <h2 class="na-title" id="na-title">本週主推</h2>
-    <p class="na-sub">Levi's・雙11 限定 $1,590・活動價以蝦皮為準</p>
-    <div class="na-row" id="na"></div>
-  </section>
-
   <div class="bar">
     <nav class="filters" id="filters" aria-label="商品分類"></nav>
     <select class="sort" id="sort" aria-label="排序">
@@ -268,7 +262,6 @@ const products = [
   {code:"LV56", label:"Levi's", brand:"Levi's", name:"圖騰羊毛外套", cat:"外套", icon:"jacket", n:4, price:1590, sold:"3", desc:"Levi's 雙11 限定價 $1,590，款號 0038B-0000。", imgs:["sg-11134201-8257s-muvoutwkndhm36", "sg-11134201-82591-muvouu5067lz37", "sg-11134201-8259k-muvouu45tds73c", "sg-11134201-8258d-muvouu5njls39e"], link:"https://s.shopee.tw/5fq1tJoJim"},
 ];
 
-const newArrivals = ["LV23","LV35","LV01","LV04","LV05","LV17"].map(c=>products.find(p=>p.code===c)).filter(Boolean);
 const icons = {
   jacket:'<path d="M34 16l16 8 16-8 20 10-6 22-10-4v40H30V44l-10 4-6-22z"/><path d="M50 24v60" fill="none" stroke="var(--ph)" stroke-width="2"/>',
   zip:'<path d="M38 12a12 10 0 0 1 24 0l24 14-6 22-10-4v40H30V44l-10 4-6-22z"/><path d="M50 22v62" fill="none" stroke="var(--ph)" stroke-width="2"/>',
@@ -290,16 +283,16 @@ const fmt = n => "NT$ " + n.toLocaleString("en-US");
 
 const pickGroups = [
   {title:"Levi's 雙11 限定 $1590", sub:"活動價以蝦皮為準", codes:["LV23","LV35","LV01","LV04","LV05","LV17"]},
-  {title:"Casual Select", sub:"開久", codes:["J39","T-67","CD09","L91","CJ02","L84"]},
+  {title:"Casual Select 開久", sub:"韓系男裝", codes:["J39","T-67","CD09","L91","CJ02","L84"]},
   {title:"20SS", sub:"韓系選物", codes:["S01","S02","S03","S05","S07","S06"]},
   {title:"Algar選品", sub:"韓系男裝", codes:["AG01","AG03","AG05","AG07","AG10","AG08"]},
 ];
 const picks = pickGroups.flatMap(g=>g.codes);
 document.getElementById("itemcount").textContent="Select Shop · "+products.length+" Items";
-const cats = ["日常精選","外套","上身","下身","配件","開久製造","20SS","Algar選品","Levi's","全部"];
-let current = "日常精選", sort = "pick";
+const cats = ["本週主推","外套","上身","下身","配件","開久製造","20SS","Algar選品","Levi's","全部"];
+let current = "本週主推", sort = "pick";
 const filters = document.getElementById("filters"), grid = document.getElementById("grid"), sortEl = document.getElementById("sort");
-const match = (p,c) => c==="全部" || (c==="日常精選" ? picks.includes(p.code) : c==="開久製造" ? p.made : (c==="20SS"||c==="Algar選品"||c==="Levi's") ? p.brand===c : p.cat===c);
+const match = (p,c) => c==="全部" || (c==="本週主推" ? picks.includes(p.code) : c==="開久製造" ? p.made : (c==="20SS"||c==="Algar選品"||c==="Levi's") ? p.brand===c : p.cat===c);
 
 function renderFilters(){
   filters.innerHTML = cats.map(c=>`<button class="chip" id="cat-${esc(c)}" aria-pressed="${c===current}">${esc(c)}<span class="n">${products.filter(p=>match(p,c)).length}</span></button>`).join("");
@@ -337,13 +330,12 @@ const cardHTML = p=>`
       </div>
     </article>`;
 function renderGrid(){
-  document.querySelector(".na").hidden = current!=="日常精選";
   let list = products.filter(p=>match(p,current));
-  if(current==="日常精選" && sort==="pick") list=[...list].sort((a,b)=>picks.indexOf(a.code)-picks.indexOf(b.code));
+  if(current==="本週主推" && sort==="pick") list=[...list].sort((a,b)=>picks.indexOf(a.code)-picks.indexOf(b.code));
   if(sort==="low") list=[...list].sort((a,b)=>a.price-b.price);
   if(sort==="high") list=[...list].sort((a,b)=>b.price-a.price);
   const sorter = l => sort==="low"?[...l].sort((x,y)=>x.price-y.price):sort==="high"?[...l].sort((x,y)=>y.price-x.price):l;
-  if(current==="日常精選"){
+  if(current==="本週主推"){
     grid.innerHTML = pickGroups.map(g=>`<div class="group-head"><h3>${esc(g.title)}</h3><span>${esc(g.sub)} · ${g.codes.length} 件</span></div>`+sorter(g.codes.map(c=>products.find(p=>p.code===c)).filter(Boolean)).map(cardHTML).join("")).join("");
   } else {
     grid.innerHTML = list.map(cardHTML).join("");
@@ -351,13 +343,6 @@ function renderGrid(){
   bindGalleries(grid);
 }
 sortEl.onchange = () => { sort = sortEl.value; renderGrid(); };
-document.getElementById("na").innerHTML = newArrivals.map(p=>`
-  <article class="na-card">
-    <div class="img">${gallery(p)}<span class="badge">11.11</span></div>
-    <h3>${esc(p.name)}</h3>
-    <div class="foot"><span class="price">${fmt(p.price)}</span><a class="cart" href="${esc(p.link)}" target="_blank" rel="sponsored noopener" aria-label="到蝦皮購買 ${esc(p.name)}" title="到蝦皮購買"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2.2l2.3 11h10.3l2-8H6.4"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="16.5" cy="19" r="1.4"/></svg></a></div>
-  </article>`).join("");
-bindGalleries(document.getElementById("na"));
 renderFilters(); renderGrid();
 
 // 點擊統計：每次點到蝦皮連結，送一筆事件給 Google Analytics
