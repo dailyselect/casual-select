@@ -89,6 +89,7 @@ h2{font-weight:700;font-size:16px;line-height:1.45;margin:0;text-wrap:balance}
 .imglink{display:grid;place-items:center;width:100%;height:100%}
 .imglink svg{width:54%;height:auto}
 .group-head{grid-column:1/-1;display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--ink);padding-bottom:12px;margin-bottom:-56px}
+.group-head{flex-wrap:wrap}.deals{flex-basis:100%;list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}.deals li{font-size:13px;line-height:1.4;padding:6px 12px;border:1px solid var(--line,#d8d6d0);background:var(--paper,#fff)}.deals li.upd{border:0;background:none;padding:6px 0;color:var(--muted);font-size:12px}
 .group-head:not(:first-child){margin-top:40px}
 .group-head h3{margin:0;font-size:clamp(24px,3vw,32px);font-weight:500;letter-spacing:.04em}
 .group-head span{font-size:13px;color:var(--muted);letter-spacing:.08em}
@@ -283,10 +284,10 @@ const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&g
 const fmt = n => "NT$ " + n.toLocaleString("en-US");
 
 const pickGroups = [
-  {title:"Levi's 雙11 限定 $1590", sub:"活動價以蝦皮為準", codes:["LV23","LV35","LV01","LV04","LV05","LV17"]},
-  {title:"Casual Select 開久", sub:"韓系男裝", codes:["J39","T-67","CD09","L91","CJ02","L84"]},
-  {title:"20SS", sub:"韓系選物", codes:["S01","S02","S03","S05","S07","S06"]},
-  {title:"Algar選品", sub:"韓系男裝", codes:["AG01","AG03","AG05","AG07","AG10","AG08"]},
+  {title:"Levi's 雙11 限定 $1590", deals:["雙11丹寧狂歡：指定商品 3 件折 $600", "蝦皮 VIP 專屬券：滿 $1,000 打 8 折，最高折 $200（至 11/30）"], sub:"活動價以蝦皮為準", codes:["LV23","LV35","LV01","LV04","LV05","LV17"]},
+  {title:"Casual Select 開久", deals:["滿 $1,799 折 $180（至 11/30）", "滿 $2,400 折 $100（至 11/15）", "分級券：滿 $1,300 折 $50 起，最高滿 $6,000 折 $400（至 1/28）", "單筆滿 $2,200 送刮刮卡，頭獎東京來回機票"], sub:"韓系男裝", codes:["J39","T-67","CD09","L91","CJ02","L84"]},
+  {title:"20SS", deals:["11/11 當天：滿 $999 打 88 折，最高折 $200", "11/11–11/13：滿 $1,111 打 85 折，最高折 $300", "11/11 當天：滿 $21 折 $20", "滿 $899 折 $50、滿 $1,499 折 $85（至 12/23）", "素面系列 2 件 98 折，重磅褲款、包款 2 件 97 折"], sub:"韓系選物", codes:["S01","S02","S03","S05","S07","S06"]},
+  {title:"Algar選品", deals:["褲子、上衣、外套、飾品 2 件 98 折，可疊加優惠券", "滿 $899 折 $30（至 11/17）", "滿 $1,800 折 $60、滿 $3,000 折 $150（至 1/10）", "新客券：滿 $500 折 $30"], sub:"韓系男裝", codes:["AG01","AG03","AG05","AG07","AG10","AG08"]},
 ];
 const picks = pickGroups.flatMap(g=>g.codes);
 document.getElementById("itemcount").textContent="Select Shop · "+products.length+" Items";
@@ -338,7 +339,7 @@ function renderGrid(){
   if(sort==="high") list=[...list].sort((a,b)=>b.price-a.price);
   const sorter = l => sort==="low"?[...l].sort((x,y)=>x.price-y.price):sort==="high"?[...l].sort((x,y)=>y.price-x.price):l;
   if(current==="本週主推"){
-    grid.innerHTML = pickGroups.map(g=>`<div class="group-head"><h3>${esc(g.title)}</h3><span>${esc(g.sub)} · ${g.codes.length} 件</span></div>`+sorter(g.codes.map(c=>products.find(p=>p.code===c)).filter(Boolean)).map(cardHTML).join("")).join("");
+    grid.innerHTML = pickGroups.map(g=>`<div class="group-head"><h3>${esc(g.title)}</h3><span>${esc(g.sub)} · ${g.codes.length} 件</span>${g.deals?`<ul class="deals" aria-label="${esc(g.title)} 蝦皮優惠">${g.deals.map(x=>`<li>${esc(x)}</li>`).join("")}<li class="upd">蝦皮賣場優惠，11/3 整理，實際以蝦皮為準</li></ul>`:""}</div>`+sorter(g.codes.map(c=>products.find(p=>p.code===c)).filter(Boolean)).map(cardHTML).join("")).join("");
   } else {
     grid.innerHTML = list.map(cardHTML).join("");
   }
