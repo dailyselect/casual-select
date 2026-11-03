@@ -140,8 +140,8 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
   </section>
 
   <section class="na" aria-labelledby="na-title">
-    <h2 class="na-title" id="na-title">雙11 限定</h2>
-    <p class="na-sub">Levi's 限定 $1,590・活動價以蝦皮為準</p>
+    <h2 class="na-title" id="na-title">本週主推</h2>
+    <p class="na-sub">Levi's・雙11 限定 $1,590・活動價以蝦皮為準</p>
     <div class="na-row" id="na"></div>
   </section>
 
@@ -337,6 +337,7 @@ const cardHTML = p=>`
       </div>
     </article>`;
 function renderGrid(){
+  document.querySelector(".na").hidden = current!=="日常精選";
   let list = products.filter(p=>match(p,current));
   if(current==="日常精選" && sort==="pick") list=[...list].sort((a,b)=>picks.indexOf(a.code)-picks.indexOf(b.code));
   if(sort==="low") list=[...list].sort((a,b)=>a.price-b.price);
