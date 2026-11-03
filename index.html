@@ -300,7 +300,7 @@ function renderFilters(){
   filters.innerHTML = cats.map(c=>`<button class="chip" id="cat-${esc(c)}" aria-pressed="${c===current}">${esc(c)}<span class="n">${products.filter(p=>match(p,c)).length}</span></button>`).join("");
   filters.querySelectorAll(".chip").forEach((b,i)=>b.onclick=()=>{current=cats[i];renderFilters();renderGrid()});
 }
-const link = (p,inner) => `<a class="imglink" href="${esc(p.link)}" target="_blank" rel="sponsored noopener" tabindex="-1">${inner}</a>`;
+const link = (p,inner) => `<a class="imglink" href="p/${encodeURIComponent(p.code)}.html" tabindex="-1" aria-label="${esc(p.name)} 商品頁">${inner}</a>`;
 function gallery(p){
   const n = p.n || 1, alt = esc(p.code+' '+p.name);
   if(n===1) return link(p,`<img src="img/${esc(p.code)}.jpg" alt="${alt}" loading="lazy" onerror="this.replaceWith(document.createRange().createContextualFragment(art('${p.icon}')))">`);
