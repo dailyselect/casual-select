@@ -38,6 +38,7 @@ section.hero>picture{width:73.6%;margin-left:auto}
 .hc-lead{font-weight:700;font-size:clamp(18px,1.7vw,24px);line-height:1.5;margin:0 0 10px;color:#fff;letter-spacing:.04em}
 .hero-copy .main{font-size:15px;line-height:1.8;color:rgba(255,255,255,.8);margin:0}
 .hc-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.m-cta{display:none}
 .hc-btn{display:inline-flex;align-items:center;justify-content:center;min-width:132px;height:44px;padding:0 22px;font-size:14px;font-weight:700;letter-spacing:.12em;text-decoration:none;transition:background .2s,color .2s,border-color .2s}
 .hc-btn.solid{background:#fff;color:#111}.hc-btn.solid:hover{background:#c8102e;color:#fff}
 .hc-btn.line{border:1px solid rgba(255,255,255,.8);color:#fff}.hc-btn.line:hover{background:#fff;color:#111}
@@ -54,7 +55,8 @@ section.hero>picture{width:73.6%;margin-left:auto}
  .hero-copy h1{font-size:40px;margin:10px 0 10px}
  .hc-lead{font-size:18px}
  .hero-copy .main{font-size:14px}
- .hc-cta{margin-top:18px;gap:10px}.hc-btn{height:42px;min-width:0;flex:1;font-size:13px;padding:0 12px}
+ .hero-copy .hc-cta{display:none}
+ .m-cta{display:flex!important;margin:0;padding:14px 18px 18px;gap:10px;background:#0f0f0f;position:relative;z-index:2}.m-cta .hc-btn{height:44px;min-width:0;flex:1;font-size:14px;padding:0 12px}
  .hc-foot{display:none}
 }
 }
@@ -266,10 +268,11 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
     <h1>日常選物所</h1>
     <p class="hc-lead">衣櫃裡最常穿的，<br>往往不是最搶眼的那件。</p>
     <p class="main">只挑耐看、好搭、能陪你穿很久的日常單品。</p>
-    <div class="hc-cta"><a class="hc-btn solid" href="#railWrap">本週主推</a><a class="hc-btn line" href="#filters" id="heroAll">逛全部商品</a></div>
+    <div class="hc-cta"><a class="hc-btn solid" href="#railWrap">本週主推</a><a class="hc-btn line hc-all" href="#filters">逛全部商品</a></div>
     <div class="hc-foot"><span id="itemcount">78 Items</span><span class="hc-line"></span><span>價格與優惠 11/7 更新</span></div>
   </div>
   <picture><source media="(min-width:721px)" srcset="img/hero-wide.jpg?v=3"><img src="img/hero.jpg?v=3" alt="日常選物所 光影中的衣架裝置"></picture>
+  <div class="hc-cta m-cta"><a class="hc-btn solid" href="#railWrap">本週主推</a><a class="hc-btn line hc-all" href="#filters">逛全部商品</a></div>
 </section>
 
 <div class="wrap">
@@ -435,7 +438,7 @@ if(revealIO)document.documentElement.classList.add("rv");
 function polish(root){markImgs(root);
  root.querySelectorAll(".slides").forEach(sl=>sl.addEventListener("scroll",()=>sl.closest(".img")?.classList.toggle("moved",sl.scrollLeft>4),{passive:true}));
  if(revealIO){const cols=getComputedStyle(root).gridTemplateColumns.split(" ").length||1;let k=0;root.querySelectorAll(".card").forEach(c=>{if(c.classList.contains("in"))return;c.style.transitionDelay=((k++%cols)*90)+"ms";revealIO.observe(c)})}}
-document.addEventListener("click",e=>{if(e.target.closest("#heroAll")){current="全部";renderFilters();renderGrid()}});
+document.addEventListener("click",e=>{if(e.target.closest(".hc-all")){current="全部";renderFilters();renderGrid()}});
 function renderFilters(){
   filters.innerHTML = cats.map(c=>`<button class="chip" id="cat-${esc(c)}" aria-pressed="${c===current && !query}">${esc(c)}<span class="n">${products.filter(p=>match(p,c)).length}</span></button>`).join("");
   placeInk();
