@@ -92,9 +92,9 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15p
 .rd .ai{font-size:11px;color:var(--muted);margin-top:12px}
 @media (max-width:640px){.rd .box{grid-template-columns:1fr;padding:20px}.rd .pic{min-height:0}.rd .pic img{max-height:300px}}
 
-.hero{background:var(--bg);padding-top:40px}
-.hero picture{display:block;width:70%;max-width:1260px;margin:0 auto}
-.hero img{display:block;width:100%;height:auto;aspect-ratio:2400/1484;object-fit:cover;object-position:50% 50%}
+.hero{background:var(--bg);padding-top:0}
+.hero picture{display:block;width:100%;margin:0}
+.hero img{display:block;width:100%;height:auto;aspect-ratio:2400/1090;max-height:78vh;object-fit:cover;object-position:50% 85%}
 
 .wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:56px 72px}
 .lead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:24px 64px;align-items:end;padding-bottom:36px;border-bottom:1px solid var(--ink)}
@@ -193,7 +193,7 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
 
 .grid.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media (max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:80px 36px}}
-@media (max-width:720px){.group-head{margin-bottom:-28px}.na-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding-bottom:6px}.na-card{flex:0 0 72%;scroll-snap-align:start}.promo{font-size:12px}.hero{padding-top:0}.hero picture{width:100%}.hero img{height:auto;aspect-ratio:1600/1360;object-position:50% 100%}.lead{grid-template-columns:1fr}.grid,.grid.g3{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 18px}h2{font-size:14.5px}.desc{display:none}.cart{width:38px;height:38px}}
+@media (max-width:720px){.group-head{margin-bottom:-28px}.na-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding-bottom:6px}.na-card{flex:0 0 72%;scroll-snap-align:start}.promo{font-size:12px}.hero{padding-top:0}.hero picture{width:100%}.hero img{height:auto;aspect-ratio:4/3;max-height:none;object-position:50% 100%}.lead{grid-template-columns:1fr}.grid,.grid.g3{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 18px}h2{font-size:14.5px}.desc{display:none}.cart{width:38px;height:38px}}
 @media (prefers-reduced-motion:no-preference){.card:hover .img img{transform:scale(1.03)}}
 @media (prefers-reduced-motion:reduce){.img img{transition:none}}
 
