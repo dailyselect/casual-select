@@ -25,20 +25,27 @@ html.rv .card{opacity:0;transform:translateY(28px);transition:opacity .7s ease,t
 html.rv .card.in{opacity:1;transform:none}
 
 
-/* hero copy overlay */
+/* hero copy overlay — magazine */
 .hero{position:relative}
-.hero:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 30% 45% at 86% 34%,rgba(240,239,236,.55),rgba(240,239,236,0) 70%)}
-.hero-copy{position:absolute;z-index:2;right:max(28px,4.5vw);top:13%;max-width:360px;color:#1b1c1d;text-align:right}
-.hero-copy h1{font-size:clamp(36px,3.8vw,56px);margin:8px 0 14px;letter-spacing:.06em}
-.hero-copy .main{font-size:14.5px;line-height:1.9;margin:0 0 8px}
-.hero-copy .note{font-size:12px;color:#3a3b3d;margin:0;font-family:var(--mono);letter-spacing:.04em}
-.hero-copy .eyebrow{color:#3a3b3d}
+.hero:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 32% 50% at 85% 36%,rgba(238,237,234,.6),rgba(238,237,234,0) 72%)}
+.hero-copy{position:absolute;z-index:2;right:max(28px,3.5vw);top:11%;width:min(330px,24vw);color:#141414}
+.hc-top{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#3b3935}
+.hc-no{color:#b5322a;font-weight:500}
+.hc-rule{flex:1;height:1px;background:#141414;opacity:.55}
+.hero-copy h1{font-family:"Noto Serif TC",serif;font-weight:600;font-size:clamp(34px,3.4vw,52px);letter-spacing:.12em;line-height:1.05;margin:16px 0 4px;color:#121212}
+.hc-en{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:clamp(18px,1.6vw,24px);color:#4a4640;margin:0 0 18px;letter-spacing:.02em}
+.hero-copy .main{font-family:"Noto Serif TC",serif;font-size:14px;line-height:2;color:#2c2a27;margin:0;padding-left:14px;border-left:2px solid #b5322a}
+.hc-foot{display:flex;justify-content:space-between;gap:10px;margin-top:18px;padding-top:10px;border-top:1px solid rgba(20,20,20,.35);font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#3b3935}
+.hc-foot span+span{text-transform:none;letter-spacing:.04em;font-family:var(--body)}
 @media (max-width:720px){
- .hero:before{background:linear-gradient(180deg,rgba(244,243,240,.82) 0%,rgba(244,243,240,.55) 26%,rgba(244,243,240,0) 42%)}
- .hero-copy{position:absolute;left:18px;right:18px;top:22px;max-width:none;text-align:left}
- .hero-copy h1{font-size:38px;margin:6px 0 10px}
- .hero-copy .main{font-size:14px;line-height:1.8}
+ .hero:before{background:linear-gradient(180deg,rgba(242,241,238,.85) 0%,rgba(242,241,238,.6) 32%,rgba(242,241,238,0) 50%)}
+ .hero-copy{left:18px;right:18px;top:20px;width:auto}
+ .hero-copy h1{font-size:36px;margin:12px 0 2px}
+ .hc-en{font-size:18px;margin-bottom:12px}
+ .hero-copy .main{font-size:13px;line-height:1.85}
  .hero-copy .main br{display:none}
+ .hc-foot{display:none}
+}
 }
 </style>
 <title>日常選物所｜男裝穿搭選物：開久 Casual Select、20SS、Levi's</title>
@@ -212,7 +219,7 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
 
 .grid.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media (max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:80px 36px}}
-@media (max-width:720px){.group-head{margin-bottom:-28px}.na-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding-bottom:6px}.na-card{flex:0 0 72%;scroll-snap-align:start}.promo{font-size:12px}.hero{padding-top:0}.hero picture{width:100%}.hero img{height:auto;aspect-ratio:1600/1880;max-height:none;object-position:50% 100%}.lead{grid-template-columns:1fr}.grid,.grid.g3{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 18px}h2{font-size:14.5px}.desc{display:none}.cart{width:38px;height:38px}}
+@media (max-width:720px){.group-head{margin-bottom:-28px}.na-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding-bottom:6px}.na-card{flex:0 0 72%;scroll-snap-align:start}.promo{font-size:12px}.hero{padding-top:0}.hero picture{width:100%}.hero img{height:auto;aspect-ratio:1600/2000;max-height:none;object-position:50% 100%}.lead{grid-template-columns:1fr}.grid,.grid.g3{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 18px}h2{font-size:14.5px}.desc{display:none}.cart{width:38px;height:38px}}
 @media (prefers-reduced-motion:no-preference){.card:hover .img img{transform:scale(1.03)}}
 @media (prefers-reduced-motion:reduce){.img img{transition:none}}
 
@@ -244,10 +251,11 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
 
 <section class="hero">
   <div class="hero-copy">
-    <div class="eyebrow" id="itemcount">Select Shop · 78 Items</div>
+    <div class="hc-top"><span class="hc-no">N°11</span><span class="hc-rule"></span><span>2026 Autumn / Winter</span></div>
     <h1>日常選物所</h1>
+    <p class="hc-en">The Everyday Edit</p>
     <p class="main">衣櫃裡最常穿的，往往不是最搶眼的那件。<br>只挑耐看、好搭、能陪你穿很久的日常單品。</p>
-    <p class="note">價格與優惠 11/7 更新，以蝦皮頁面為準</p>
+    <div class="hc-foot"><span id="itemcount">78 Items</span><span>價格與優惠 11/7 更新・以蝦皮為準</span></div>
   </div>
   <picture><source media="(min-width:721px)" srcset="img/hero-wide.jpg?v=3"><img src="img/hero.jpg?v=3" alt="日常選物所 光影中的衣架裝置"></picture>
 </section>
@@ -394,7 +402,7 @@ const pickGroups = [
   {title:"20SS", tag:"11/11 起", big:"雙11", side:["限時","優惠"], sub:"滿 $1,111 打 85 折", bars:["11/11 滿 $999 打 88 折","滿 $1,499 折 $85"], codes:["S01","S02","S03","S05","S07","S06"]},
 ];
 const picks = pickGroups.flatMap(g=>g.codes);
-document.getElementById("itemcount").textContent="Select Shop · "+products.length+" Items";
+document.getElementById("itemcount").textContent=products.length+" Items";
 const cats = ["本週主推","外套","上身","下身","配件","開久Casual","20SS","Levi's","全部"];
 let current = "本週主推", sort = "pick";
 const filters = document.getElementById("filters"), grid = document.getElementById("grid"), sortEl = document.getElementById("sort");
