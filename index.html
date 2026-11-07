@@ -25,28 +25,30 @@ html.rv .card{opacity:0;transform:translateY(28px);transition:opacity .7s ease,t
 html.rv .card.in{opacity:1;transform:none}
 
 
-/* hero copy overlay — clear */
-.hero{position:relative}
-.hero:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(12,12,12,.86) 0%,rgba(12,12,12,.7) 30%,rgba(12,12,12,.25) 50%,rgba(12,12,12,0) 62%)}
-.hero-copy{position:absolute;z-index:2;left:max(24px,6vw);top:50%;transform:translateY(-54%);width:min(460px,40vw);color:#fff}
+/* hero: dark panel left, visual right */
+section.hero{position:relative;background:#0f0f0f;overflow:hidden}
+section.hero>picture{width:73.6%;margin-left:auto}
+.hero picture img{aspect-ratio:1.618;max-height:78vh;object-position:50% 85%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 26%);mask-image:linear-gradient(90deg,transparent 0,#000 26%)}
+.hero-copy{position:absolute;z-index:2;left:max(24px,6vw);top:50%;transform:translateY(-52%);width:min(420px,30vw);color:#fff}
 .hc-kicker{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#ff5a4e}
-.hero-copy h1{font-weight:900;font-size:clamp(40px,4.8vw,72px);letter-spacing:.04em;line-height:1.05;margin:14px 0 8px;color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.35)}
-.hc-lead{font-weight:700;font-size:clamp(20px,2vw,28px);margin:0 0 14px;color:#fff;letter-spacing:.06em}
-.hero-copy .main{font-size:15px;line-height:1.8;color:rgba(255,255,255,.88);margin:0}
+.hero-copy h1{font-weight:900;font-size:clamp(40px,4.6vw,70px);letter-spacing:.04em;line-height:1.05;margin:14px 0 14px;color:#fff}
+.hc-lead{font-weight:700;font-size:clamp(18px,1.7vw,24px);line-height:1.5;margin:0 0 10px;color:#fff;letter-spacing:.04em}
+.hero-copy .main{font-size:15px;line-height:1.8;color:rgba(255,255,255,.8);margin:0}
 .hc-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
 .hc-btn{display:inline-flex;align-items:center;justify-content:center;min-width:132px;height:44px;padding:0 22px;font-size:14px;font-weight:700;letter-spacing:.12em;text-decoration:none;transition:background .2s,color .2s,border-color .2s}
 .hc-btn.solid{background:#fff;color:#111}.hc-btn.solid:hover{background:#c8102e;color:#fff}
 .hc-btn.line{border:1px solid rgba(255,255,255,.8);color:#fff}.hc-btn.line:hover{background:#fff;color:#111}
-.hc-foot{display:flex;align-items:center;gap:12px;margin-top:28px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75)}
-.hc-line{width:48px;height:1px;background:rgba(255,255,255,.6)}
+.hc-foot{display:flex;align-items:center;gap:12px;margin-top:28px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.hc-line{width:48px;height:1px;background:rgba(255,255,255,.55)}
 .hc-foot span:last-child{text-transform:none;letter-spacing:.04em;font-family:var(--body)}
 @media (max-width:720px){
- .hero:before{background:linear-gradient(180deg,rgba(12,12,12,.82) 0%,rgba(12,12,12,.62) 38%,rgba(12,12,12,.15) 58%,rgba(12,12,12,0) 70%)}
- .hero-copy{left:18px;right:18px;top:26px;transform:none;width:auto}
- .hero-copy h1{font-size:40px;margin:10px 0 6px}
- .hc-lead{font-size:20px;margin-bottom:8px}
- .hero-copy .main{font-size:13.5px}
- .hc-cta{margin-top:16px;gap:10px}.hc-btn{height:40px;min-width:0;flex:1;font-size:13px;padding:0 12px}
+ section.hero>picture{width:100%}
+ .hero picture img{aspect-ratio:4/3;max-height:none;object-position:50% 100%;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 22%);mask-image:linear-gradient(180deg,transparent 0,#000 22%)}
+ .hero-copy{position:static;transform:none;width:auto;padding:30px 18px 6px}
+ .hero-copy h1{font-size:40px;margin:10px 0 10px}
+ .hc-lead{font-size:18px}
+ .hero-copy .main{font-size:14px}
+ .hc-cta{margin-top:18px;gap:10px}.hc-btn{height:42px;min-width:0;flex:1;font-size:13px;padding:0 12px}
  .hc-foot{display:none}
 }
 }
@@ -256,8 +258,8 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
   <div class="hero-copy">
     <div class="hc-kicker">New Season · 2026 AW</div>
     <h1>日常選物所</h1>
-    <p class="hc-lead">耐看的，才穿得久。</p>
-    <p class="main">只挑好搭、經典、能陪你穿很久的日常單品。<br>開久 Casual Select・20SS・Levi's</p>
+    <p class="hc-lead">衣櫃裡最常穿的，<br>往往不是最搶眼的那件。</p>
+    <p class="main">只挑耐看、好搭、能陪你穿很久的日常單品。</p>
     <div class="hc-cta"><a class="hc-btn solid" href="#railWrap">本週主推</a><a class="hc-btn line" href="#filters" id="heroAll">逛全部商品</a></div>
     <div class="hc-foot"><span id="itemcount">78 Items</span><span class="hc-line"></span><span>價格與優惠 11/7 更新</span></div>
   </div>
