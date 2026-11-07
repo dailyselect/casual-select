@@ -16,7 +16,14 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);
 (function(){try{var q=new URLSearchParams(location.search).get('me');if(q==='1')localStorage.setItem('ds_internal','1');if(q==='0')localStorage.removeItem('ds_internal');if(localStorage.getItem('ds_internal')==='1'){window['ga-disable-G-JE8Q86BKDQ']=true;window.dsInternal=true;}}catch(e){}})();
 gtag('js',new Date());gtag('config','G-JE8Q86BKDQ');
 </script>
-<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}
+/* hover swap + reveal */
+.img img.hov,.img img.hov.ok{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;pointer-events:none;transition:opacity .5s ease,transform .4s}
+@media (hover:hover) and (pointer:fine){.card:hover .img:not(.moved) img.hov.ok{opacity:1}}
+.img.moved img.hov{display:none}
+html.rv .card{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+html.rv .card.in{opacity:1;transform:none}
+</style>
 <title>日常選物所｜男裝穿搭選物：開久 Casual Select、20SS、Levi's</title>
 <link rel="canonical" href="https://dailyselect.github.io/casual-select/">
 <meta property="og:url" content="https://dailyselect.github.io/casual-select/">
@@ -387,6 +394,11 @@ function placeInk(){const f=document.querySelector(".filters");if(!f)return;let 
 addEventListener("resize",()=>{inkPos=null;placeInk()});
 function markImgs(root){root.querySelectorAll(".img img").forEach(im=>{const ok=()=>{im.classList.add("ok");im.closest(".img")?.classList.add("done")};if(im.complete&&im.naturalWidth)ok();else{im.addEventListener("load",ok,{once:true});im.addEventListener("error",ok,{once:true})}})}
 (()=>{const a=[...document.querySelectorAll(".promo .ann")];if(a.length<2)return;let k=0;setInterval(()=>{if(document.hidden)return;const c=a[k];c.classList.remove("on");c.classList.add("out");k=(k+1)%a.length;const n=a[k];n.classList.remove("out");n.classList.add("on");setTimeout(()=>c.classList.remove("out"),600)},3800)})();
+const revealIO=("IntersectionObserver" in window&&!matchMedia("(prefers-reduced-motion: reduce)").matches)?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");revealIO.unobserve(e.target)}}),{rootMargin:"0px 0px -8% 0px"}):null;
+if(revealIO)document.documentElement.classList.add("rv");
+function polish(root){markImgs(root);
+ root.querySelectorAll(".slides").forEach(sl=>sl.addEventListener("scroll",()=>sl.closest(".img")?.classList.toggle("moved",sl.scrollLeft>4),{passive:true}));
+ if(revealIO){const cols=getComputedStyle(root).gridTemplateColumns.split(" ").length||1;let k=0;root.querySelectorAll(".card").forEach(c=>{if(c.classList.contains("in"))return;c.style.transitionDelay=((k++%cols)*90)+"ms";revealIO.observe(c)})}}
 function renderFilters(){
   filters.innerHTML = cats.map(c=>`<button class="chip" id="cat-${esc(c)}" aria-pressed="${c===current && !query}">${esc(c)}<span class="n">${products.filter(p=>match(p,c)).length}</span></button>`).join("");
   placeInk();
@@ -397,7 +409,7 @@ function gallery(p){
   const n = p.n || 1, alt = esc(p.code+' '+p.name);
   if(n===1) return link(p,`<img src="${p.imgs?`https://down-tw.img.susercontent.com/file/${esc(p.imgs[0])}@resize_w450_nl.webp`:`img/${esc(p.code)}.jpg`}" alt="${alt}" loading="lazy" onerror="this.replaceWith(document.createRange().createContextualFragment(art('${p.icon}')))">`);
   const src = i => p.imgs ? `https://down-tw.img.susercontent.com/file/${esc(p.imgs[i])}@resize_w450_nl.webp` : `img/${esc(p.code)}${i?'-'+(i+1):''}.jpg`;
-  return `${link(p,`<div class="slides">${Array.from({length:n},(_,i)=>`<img src="${src(i)}" alt="${alt} 第 ${i+1} 張" loading="lazy">`).join("")}</div>`)}
+  return `${link(p,`<div class="slides">${Array.from({length:n},(_,i)=>`<img src="${src(i)}" alt="${alt} 第 ${i+1} 張" loading="lazy">`).join("")}</div>`)}<img class="hov" src="${src(1)}" alt="" aria-hidden="true" loading="lazy">
     <div class="dots" aria-hidden="true">${Array.from({length:n},(_,i)=>`<i class="${i?'':'on'}"></i>`).join("")}</div>
     <button class="nav prev" aria-label="上一張">‹</button><button class="nav next" aria-label="下一張">›</button>`;
 }
@@ -440,7 +452,7 @@ function renderGrid(){
     qinfo.hidden=false;qinfo.innerHTML=`搜尋「${esc(query)}」找到 ${list.length} 件<button type="button" id="qclear">清除搜尋</button>`;
     document.getElementById("qclear").onclick=()=>{qEl.value="";setQuery("")};
     grid.innerHTML = list.length?list.map(cardHTML).join(""):`<p class="empty">沒有找到相關商品，換個關鍵字試試，例如「寬褲」「牛仔」「外套」。</p>`;
-    bindGalleries(grid);markImgs(grid);return;
+    bindGalleries(grid);polish(grid);return;
   }
   qinfo.hidden=true;
   let list = products.filter(p=>match(p,current));
@@ -453,7 +465,7 @@ function renderGrid(){
   } else {
     grid.innerHTML = list.map(cardHTML).join("");
   }
-  bindGalleries(grid);markImgs(grid);
+  bindGalleries(grid);polish(grid);
 }
 sortEl.onchange = () => { sort = sortEl.value; renderGrid(); };
 let qTimer;
