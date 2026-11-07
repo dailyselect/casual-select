@@ -147,24 +147,21 @@ h2{font-weight:700;font-size:16px;line-height:1.45;margin:0;text-wrap:balance}
 .group-head{grid-column:1/-1;display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--ink);padding-bottom:12px;margin-bottom:-56px}
 .group-head{flex-wrap:wrap}.deals{flex-basis:100%;list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}.deals li{font-size:13px;line-height:1.4;padding:6px 12px;border:1px solid var(--line,#d8d6d0);background:var(--paper,#fff)}.deals li.upd{border:0;background:none;padding:6px 0;color:var(--muted);font-size:12px}
 
-.promo-card{width:100%;display:grid;grid-template-columns:1.35fr 1fr;min-height:300px;background:#a81f26;color:#fff;overflow:hidden}
-.pc-pics{display:grid;grid-template-columns:1fr 1fr;background:#ece8e1}
-.pc-pics.one{grid-template-columns:1fr;position:relative;min-height:190px}.pc-pics.one img{position:absolute;inset:0;object-position:50% 0}.pc-pics img{width:100%;height:100%;object-fit:cover;display:block}
-.pc-panel{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px 26px 22px;text-align:center}
-.pc-stripe{position:absolute;left:0;right:0;top:18px;height:26px;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.85) 0 5px,transparent 5px 11px)}
-.pc-brand{position:relative;z-index:1;background:#fff;color:#a81f26;font-weight:900;font-size:17px;letter-spacing:.04em;padding:4px 16px;border-radius:4px 4px 14px 14px;margin-top:4px}
+.promo-card{position:relative;width:100%;background:#151515;color:#fff;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:10px 40px;padding:62px 48px 30px;overflow:hidden}
+.pc-stripe{position:absolute;left:0;right:0;top:18px;height:26px;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.75) 0 5px,transparent 5px 11px)}
+.pc-l,.pc-r{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.pc-brand{position:absolute;left:50%;top:10px;transform:translateX(-50%);z-index:1;background:#fff;color:#151515;font-weight:900;font-size:17px;letter-spacing:.04em;padding:4px 18px;border-radius:4px 4px 14px 14px;white-space:nowrap}
 .pc-big{display:flex;align-items:center;gap:8px;line-height:1}
-.pc-big b{font-size:clamp(54px,6vw,76px);font-weight:900;letter-spacing:.01em;text-shadow:3px 3px 0 #5c0b10,-1px -1px 0 #5c0b10}
-.pc-big span{display:flex;flex-direction:column;font-size:clamp(20px,2.2vw,27px);font-weight:900;line-height:1.1;text-shadow:2px 2px 0 #5c0b10}
+.pc-big b{font-size:clamp(56px,6vw,78px);font-weight:900;letter-spacing:.01em;text-shadow:3px 3px 0 #c8102e}
+.pc-big span{display:flex;flex-direction:column;font-size:clamp(20px,2.2vw,27px);font-weight:900;line-height:1.1;text-shadow:2px 2px 0 #c8102e}
 .pc-sub{font-size:clamp(18px,2vw,23px);font-weight:900;letter-spacing:.04em}
-.pc-sub em,.pc-bars em{font-style:normal;color:#ffd84a}
-.pc-sub em{font-size:1.5em;vertical-align:-.08em}
-.pc-bars{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;width:100%;max-width:320px}
-.pc-bars li{background:#111;transform:skewX(-12deg);padding:6px 14px;font-weight:900;font-size:16px;white-space:nowrap}
+.pc-sub em{font-style:normal;color:#ff3b3b;font-size:1.5em;vertical-align:-.08em}
+.pc-bars{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;width:100%;max-width:380px}
+.pc-bars li{background:#c8102e;transform:skewX(-12deg);padding:7px 14px;font-weight:900;font-size:16px;white-space:nowrap}
 .pc-bars li>i{display:inline-block;transform:skewX(12deg);font-style:normal}
-.pc-bars em{font-size:1.35em}
-.pc-tag{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:rgba(255,255,255,.75)}
-@media (max-width:720px){.promo-card{grid-template-columns:1fr;min-height:0}.pc-pics{height:190px}.pc-pics.one{grid-template-columns:1fr;position:relative;min-height:190px}.pc-pics.one img{position:absolute;inset:0;object-position:50% 0}.pc-pics img{object-position:50% 25%}.pc-panel{padding:18px 18px 20px}.pc-big b{font-size:60px}}
+.pc-bars em{font-style:normal;color:#ffe066;font-size:1.35em}
+.pc-tag{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:rgba(255,255,255,.7)}
+@media (max-width:720px){.promo-card{grid-template-columns:1fr;padding:60px 18px 20px;gap:14px}.pc-big b{font-size:60px}}
 .group-head:not(:first-child){margin-top:40px}
 .group-head h3{margin:0;font-size:clamp(24px,3vw,32px);font-weight:500;letter-spacing:.04em}
 .group-head>span{font-size:13px;color:var(--muted);letter-spacing:.08em}
@@ -353,7 +350,7 @@ const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&g
 const fmt = n => "NT$ " + n.toLocaleString("en-US");
 
 const pickGroups = [
-  {title:"Levi's", tag:"11/6–11/30", big:"雙11", side:["丹寧","狂歡"], photo:"img/promo-levis.webp", sub:"全館 3 折起", bars:["滿 2 件折 $300","滿 3 件折 $600"], codes:["LV23","LV35","LV01","LV04","LV05","LV17"]},
+  {title:"Levi's", tag:"11/6–11/30", big:"雙11", side:["丹寧","狂歡"], sub:"全館 3 折起", bars:["滿 2 件折 $300","滿 3 件折 $600"], codes:["LV23","LV35","LV01","LV04","LV05","LV17"]},
   {title:"Casual Select 開久", tag:"11/11–11/13", big:"雙11", side:["限時","優惠"], sub:"滿 $1,180 起 85 折", bars:["滿 $2,400 折 $100","滿 $2,200 抽東京機票"], codes:["J36","CT24","J38","T-67","L91","L84"]},
   {title:"20SS", tag:"11/11 起", big:"雙11", side:["限時","優惠"], sub:"滿 $1,111 打 85 折", bars:["11/11 滿 $999 打 88 折","滿 $1,499 折 $85"], codes:["S01","S02","S03","S05","S07","S06"]},
 ];
@@ -425,7 +422,7 @@ function renderGrid(){
   if(sort==="high") list=[...list].sort((a,b)=>b.price-a.price);
   const sorter = l => sort==="low"?[...l].sort((x,y)=>x.price-y.price):sort==="high"?[...l].sort((x,y)=>y.price-x.price):l;
   if(current==="本週主推"){
-    grid.innerHTML = pickGroups.map((g,i)=>{const em=t=>esc(t).replace(/(\$?[\d,]+)/g,"<em>$1</em>");const pic=c=>{const p=products.find(x=>x.code===c);return p?`<img src="${p.imgs?`https://down-tw.img.susercontent.com/file/${esc(p.imgs[0])}@resize_w450_nl.webp`:`img/${esc(p.code)}.jpg`}" alt="" loading="lazy">`:""};return `<div class="group-head"><div class="promo-card"><div class="pc-pics${g.photo?" one":""}">${g.photo?`<img src="${g.photo}" alt="" loading="lazy">`:pic(g.codes[0])+pic(g.codes[1])}</div><div class="pc-panel"><div class="pc-stripe"></div><span class="pc-brand">${esc(g.title)}</span><div class="pc-big"><b>${esc(g.big)}</b><span>${g.side.map(esc).join("<br>")}</span></div><div class="pc-sub">${em(g.sub)}</div><ul class="pc-bars">${g.bars.map(x=>`<li><i>${em(x)}</i></li>`).join("")}</ul><span class="pc-tag">${esc(g.tag)}</span></div></div></div>`+sorter(g.codes.map(c=>products.find(p=>p.code===c)).filter(Boolean)).map(cardHTML).join("")}).join("");
+    grid.innerHTML = pickGroups.map((g,i)=>{const em=t=>esc(t).replace(/(\$?[\d,]+)/g,"<em>$1</em>");return `<div class="group-head"><div class="promo-card"><div class="pc-stripe"></div><span class="pc-brand">${esc(g.title)}</span><div class="pc-l"><div class="pc-big"><b>${esc(g.big)}</b><span>${g.side.map(esc).join("<br>")}</span></div><div class="pc-sub">${em(g.sub)}</div></div><div class="pc-r"><ul class="pc-bars">${g.bars.map(x=>`<li><i>${em(x)}</i></li>`).join("")}</ul><span class="pc-tag">${esc(g.tag)}</span></div></div></div>`+sorter(g.codes.map(c=>products.find(p=>p.code===c)).filter(Boolean)).map(cardHTML).join("")}).join("");
   } else {
     grid.innerHTML = list.map(cardHTML).join("");
   }
