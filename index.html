@@ -516,7 +516,7 @@ renderFilters(); renderGrid();
 
 
 // ===== 衣架 =====
-const RAIL=["J36","CT24","T-67","L91","L84"];
+const RAIL=["J36","CT24","LV35","T-67","L91","L84"];
 (function(){
   const rail=document.getElementById("rail"); if(!rail) return;
   const items=RAIL.map(c=>products.find(p=>p.code===c)).filter(Boolean);
