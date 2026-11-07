@@ -42,31 +42,31 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15p
 .rail-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px}
 .rail-head h2{margin:0;font-size:22px;letter-spacing:.04em}
 .rail-head span{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.12em}
-.rail-stage{position:relative;background:linear-gradient(#f4f3f0,#ecebe7);border-radius:6px;overflow:hidden;padding:46px 0 18px}
-.rail-bar{position:absolute;left:3%;right:3%;top:40px;height:9px;border-radius:5px;background:linear-gradient(#fdfdfd,#b9bcc0 45%,#8e9196 60%,#e6e7e9);box-shadow:0 3px 6px rgba(0,0,0,.18);z-index:3}
-.rail{position:relative;display:flex;justify-content:center;align-items:flex-start;gap:0;padding:0 4%;perspective:1100px;min-height:500px;z-index:2}
-.hang{position:relative;flex:0 0 auto;width:150px;margin:0 -16px;height:500px;cursor:pointer;background:none;border:0;padding:0;outline:none}
-.hang .g{position:absolute;left:50%;top:-14px;transform-origin:50% 0;transform:translateX(-50%) rotateY(64deg);transition:transform .7s cubic-bezier(.2,.8,.2,1),filter .4s;filter:brightness(.92) drop-shadow(0 10px 12px rgba(0,0,0,.18))}
-.hang .g img{display:block;height:340px;width:auto;max-width:none;pointer-events:none}
-.hang.pants .g img{height:480px}
-.hang:hover,.hang:focus-visible,.hang.face{z-index:5}
-.hang:hover .g,.hang:focus-visible .g,.hang.face .g{transform:translateX(-50%) rotateY(0);filter:brightness(1) drop-shadow(0 16px 18px rgba(0,0,0,.22))}
-.hang:hover .sw,.hang:focus-visible .sw,.hang.face .sw{animation:swing 1.6s ease-out}
-.hang .sw{transform-origin:50% 0}
-@keyframes swing{0%{transform:rotate(0)}15%{transform:rotate(4deg)}35%{transform:rotate(-3deg)}55%{transform:rotate(1.8deg)}75%{transform:rotate(-.8deg)}100%{transform:rotate(0)}}
-.hang .tag{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);white-space:nowrap;font-size:12px;opacity:0;transition:opacity .3s;background:var(--ink);color:#fff;padding:3px 10px;border-radius:2px;pointer-events:none}
-.hang:hover .tag,.hang:focus-visible .tag,.hang.face .tag{opacity:1}
+.rail-stage{position:relative;background:linear-gradient(#f4f3f0,#e9e8e3);border-radius:6px;overflow:hidden;padding:44px 0 14px}
+.rail-bar{position:absolute;left:3%;right:3%;top:38px;height:7px;border-radius:4px;background:linear-gradient(#fdfdfd,#b9bcc0 45%,#8e9196 60%,#e6e7e9);box-shadow:0 3px 6px rgba(0,0,0,.16);z-index:3}
+.rail{--h:300px;--gap:28px;position:relative;display:flex;justify-content:center;align-items:flex-start;gap:var(--gap);padding:0 2%;z-index:2}
+.hang{--k:1;position:relative;flex:0 0 auto;height:calc(var(--h)*1.42 + 34px);width:calc(var(--h)*var(--k)*var(--sa,.3));transition:width .9s cubic-bezier(.65,0,.35,1);cursor:pointer;background:none;border:0;padding:0;outline:none;perspective:900px}
+.hang.pants{--k:1.42}
+.hang.face{width:calc(var(--h)*var(--k)*var(--fa,.75))}
+.hang .sw{position:absolute;left:50%;top:-12px;width:0;transform-origin:50% 0}
+.hang img{position:absolute;top:0;left:0;height:calc(var(--h)*var(--k));width:auto;max-width:none;transform:translateX(-50%);transform-origin:50% 0;pointer-events:none;transition:opacity .55s ease,transform .9s cubic-bezier(.65,0,.35,1);filter:drop-shadow(0 10px 12px rgba(0,0,0,.16))}
+.hang img.front{opacity:0;transform:translateX(-50%) rotateY(-75deg)}
+.hang.face img.side{opacity:0;transform:translateX(-50%) rotateY(75deg)}
+.hang.face img.front{opacity:1;transform:translateX(-50%) rotateY(0)}
+.hang.face .sw{animation:swing 1.8s .5s ease-out}
+@keyframes swing{0%{transform:rotate(0)}18%{transform:rotate(2.6deg)}38%{transform:rotate(-1.9deg)}58%{transform:rotate(1.1deg)}78%{transform:rotate(-.5deg)}100%{transform:rotate(0)}}
+.hang .tag{position:absolute;left:50%;bottom:0;transform:translateX(-50%);white-space:nowrap;font-size:12px;opacity:0;transition:opacity .4s .3s;background:var(--ink);color:#fff;padding:3px 10px;border-radius:2px;pointer-events:none}
+.hang.face .tag{opacity:1}
 .rail-note{font-size:12px;color:var(--muted);margin-top:8px}
-@media (max-width:760px){
- .rail-stage{padding-top:40px}
- .rail{justify-content:flex-start;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 32vw;min-height:400px;scrollbar-width:none}
- .rail::-webkit-scrollbar{display:none}
- .hang{scroll-snap-align:center;width:120px;margin:0 -12px;height:390px}
- .hang .g img{height:250px}.hang.pants .g img{height:360px}
- .hang .g{transform:translateX(-50%) rotateY(58deg)}
- .hang:hover .g{transform:translateX(-50%) rotateY(58deg)}
- .hang.face .g{transform:translateX(-50%) rotateY(0)}
-}
+@media (max-width:760px){.rail-wrap{padding:0 12px}.rail-head h2{font-size:19px}.rail-stage{padding-top:36px}.rail-bar{top:30px}}
+@media (prefers-reduced-motion:reduce){.hang,.hang img{transition:none}.hang.face .sw{animation:none}}
+.rd .pic{position:relative;overflow:hidden}
+.rd .pic img{transition:opacity .7s ease}
+.rd .pic img.real{position:absolute;inset:0;width:100%;height:100%;max-height:none;object-fit:cover;opacity:0}
+.rd .pic.show-real img.real{opacity:1}.rd .pic.show-real img#rdimg{opacity:0}
+.rd .views{display:flex;gap:8px;margin-top:14px}
+.rd .views button{font:12px var(--mono);letter-spacing:.08em;padding:6px 10px;border:1px solid var(--line);background:#fff;cursor:pointer}
+.rd .views button.on{border-color:var(--ink);background:var(--ink);color:#fff}
 .rd{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:rgba(240,239,236,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:16px}
 .rd[hidden]{display:none}
 .rd .box{background:#fff;max-width:760px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.15);position:relative;max-height:92vh;overflow:auto}
@@ -199,9 +199,9 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
   <section class="rail-wrap" id="railWrap" aria-label="本週衣架">
     <div class="rail-head"><h2>本週衣架</h2><span>ON THE RAIL · 開久 CASUAL</span></div>
     <div class="rail-stage"><div class="rail-bar"></div><div class="rail" id="rail"></div></div>
-    <p class="rail-note">滑過去（手機左右滑）看正面，點一下看細節。衣架上的商品圖為依實拍生成的示意圖，實物請以商品頁照片為準。</p>
+    <p class="rail-note">滑過去（手機點一下）轉正面，再點一下看細節。衣架上的商品圖為依實拍生成的示意圖，實物請以商品頁照片為準。</p>
   </section>
-  <div class="rd" id="rd" hidden role="dialog" aria-modal="true" aria-label="商品細節"><div class="box"><button class="x" id="rdx" aria-label="關閉">×</button><div class="pic"><img id="rdimg" alt=""></div><div><div class="k" id="rdk"></div><h3 id="rdn"></h3><div class="pr" id="rdp"></div><div class="ds" id="rdd"></div><div class="acts"><a class="buy" id="rdbuy" target="_blank" rel="sponsored noopener">到蝦皮購買</a><a class="pg" id="rdpg">看商品頁與實拍照</a></div><div class="ai">示意圖由 AI 依商品實拍生成，顏色與細節以商品頁為準。</div></div></div></div>
+  <div class="rd" id="rd" hidden role="dialog" aria-modal="true" aria-label="商品細節"><div class="box"><button class="x" id="rdx" aria-label="關閉">×</button><div class="pic" id="rdpic"><img id="rdimg" alt=""><img class="real" id="rdreal" alt=""></div><div><div class="k" id="rdk"></div><h3 id="rdn"></h3><div class="pr" id="rdp"></div><div class="ds" id="rdd"></div><div class="views" id="rdviews"><button type="button" data-v="real" class="on">實拍</button><button type="button" data-v="cut">衣架示意</button></div><div class="acts"><a class="buy" id="rdbuy" target="_blank" rel="sponsored noopener">到蝦皮購買</a><a class="pg" id="rdpg">看商品頁與實拍照</a></div><div class="ai">示意圖由 AI 依商品實拍生成，顏色與細節以商品頁為準。</div></div></div></div>
 
   <div class="bar">
     <nav class="filters" id="filters" aria-label="商品分類"></nav>
@@ -447,28 +447,49 @@ const RAIL=["J36","CT24","J39","T-67","L91","L84"];
 (function(){
   const rail=document.getElementById("rail"); if(!rail) return;
   const items=RAIL.map(c=>products.find(p=>p.code===c)).filter(Boolean);
-  rail.innerHTML=items.map(p=>`<button class="hang${p.cat==="下身"?" pants":""}" data-code="${esc(p.code)}" aria-label="${esc(p.name)} NT$${p.price}"><div class="g"><div class="sw"><img src="img/rail/${esc(p.code)}.webp" alt="${esc(p.name)}" loading="lazy"></div></div><span class="tag">${esc(p.name)} · $${p.price.toLocaleString()}</span></button>`).join("");
+  rail.innerHTML=items.map(p=>`<button class="hang${p.cat==="下身"?" pants":""}" data-code="${esc(p.code)}" aria-label="${esc(p.name)} NT$${p.price}"><div class="sw"><img class="side" src="img/rail/${esc(p.code)}-side.webp" alt=""><img class="front" src="img/rail/${esc(p.code)}.webp" alt="${esc(p.name)}"></div><span class="tag">${esc(p.name)} · $${p.price.toLocaleString()}</span></button>`).join("");
+  const hangs=[...rail.querySelectorAll(".hang")];
+  // 依圖片比例與螢幕寬度算出衣服高度，讓整排剛好放得下
+  const fit=()=>{
+    const mob=innerWidth<=760, W=rail.clientWidth*(mob?0.86:0.94), gap=mob?Math.max(8,W*0.025):Math.min(34,W*0.028);
+    rail.style.setProperty("--gap",gap+"px");
+    const k=h=>h.classList.contains("pants")?1.42:1, sa=h=>+h.style.getPropertyValue("--sa")||.3, fa=h=>+h.style.getPropertyValue("--fa")||.75;
+    const sumS=hangs.reduce((t,h)=>t+sa(h)*k(h),0);
+    const worst=Math.max(...hangs.map(h=>sumS-sa(h)*k(h)+fa(h)*k(h)));
+    let H=(W-gap*(hangs.length-1))/worst; H=Math.min(H, mob?260:330, innerHeight*0.42); H=Math.max(H,110);
+    rail.style.setProperty("--h",H+"px");
+  };
+  hangs.forEach(h=>{const [s,f]=h.querySelectorAll("img");
+    const set=()=>{if(s.naturalWidth)h.style.setProperty("--sa",(s.naturalWidth/s.naturalHeight).toFixed(3));if(f.naturalWidth)h.style.setProperty("--fa",(f.naturalWidth/f.naturalHeight).toFixed(3));fit()};
+    s.complete?set():s.addEventListener("load",set); f.complete?set():f.addEventListener("load",set);});
+  addEventListener("resize",fit); fit();
+  // 聚光：自動輪播，滑過/點選就停
+  let ai=0, timer=null, hold=null;
+  const face=i=>{ai=(i+hangs.length)%hangs.length; hangs.forEach((h,j)=>h.classList.toggle("face",j===ai))};
+  function startAuto(){ if(matchMedia("(prefers-reduced-motion: reduce)").matches) return; stopAuto(); timer=setInterval(()=>face(ai+1),2600); }
+  function stopAuto(){ clearInterval(timer); timer=null; }
+  face(0);
   const rd=document.getElementById("rd");
+  const setView=v=>{rdpic.classList.toggle('show-real',v==='real');rdviews.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===v))};
+  rdviews.addEventListener('click',e=>{const b=e.target.closest('button');if(b){clearTimeout(window.__rdT);setView(b.dataset.v)}});
   const open=code=>{const p=products.find(x=>x.code===code); if(!p) return;
     rdimg.src=`img/rail/${p.code}.webp`; rdimg.alt=p.name; rdk.textContent=(p.brand||"Casual Select 開久")+" · "+p.code;
     rdn.textContent=p.name; rdp.textContent="NT$ "+p.price.toLocaleString(); rdd.textContent=p.desc||"";
-    rdbuy.href=p.link; rdpg.href=`p/${encodeURIComponent(p.code)}.html`; rd.hidden=false; document.body.style.overflow="hidden";
+    rdbuy.href=p.link; rdpg.href=`p/${encodeURIComponent(p.code)}.html`;
+    rdreal.src=p.imgs?`https://down-tw.img.susercontent.com/file/${p.imgs[0]}`:`img/${p.code}.jpg`; rdreal.alt=p.name+" 實拍";
+    setView('cut'); clearTimeout(window.__rdT); window.__rdT=setTimeout(()=>setView('real'),700);
+    rd.hidden=false; document.body.style.overflow="hidden"; stopAuto();
     if(typeof gtag==="function") gtag("event","rail_open",{item_code:p.code,item_name:p.name});};
-  const close=()=>{rd.hidden=true;document.body.style.overflow=""};
-  rail.addEventListener("click",e=>{const h=e.target.closest(".hang"); if(!h) return;
-    if(matchMedia("(max-width:760px)").matches && !h.classList.contains("face")){h.scrollIntoView({behavior:"smooth",inline:"center",block:"nearest"});return}
+  const close=()=>{rd.hidden=true;document.body.style.overflow="";startAuto()};
+  rail.addEventListener("mouseover",e=>{const h=e.target.closest(".hang"); if(!h) return; stopAuto(); face(hangs.indexOf(h));});
+  rail.addEventListener("mouseleave",()=>{clearTimeout(hold); hold=setTimeout(startAuto,1500)});
+  rail.addEventListener("click",e=>{const h=e.target.closest(".hang"); if(!h) return; const i=hangs.indexOf(h);
+    if(!h.classList.contains("face")){stopAuto(); face(i); clearTimeout(hold); hold=setTimeout(startAuto,8000); return}
     open(h.dataset.code)});
   rdx.addEventListener("click",close); rd.addEventListener("click",e=>{if(e.target===rd)close()});
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!rd.hidden)close()});
   rdbuy.addEventListener("click",()=>{if(typeof gtag==="function"){const c=rdk.textContent.split(" · ").pop();gtag("event","shopee_click",{item_code:c,item_name:rdn.textContent,area:"rail",link_type:"rail_buy",transport_type:"beacon"})}});
-  // 手機：最靠近中間的那件轉正面
-  const mq=matchMedia("(max-width:760px)");
-  const pick=()=>{if(!mq.matches){rail.querySelectorAll(".hang.face").forEach(h=>h.classList.remove("face"));return}
-    const r=rail.getBoundingClientRect(),cx=r.left+r.width/2;let best=null,bd=1e9;
-    rail.querySelectorAll(".hang").forEach(h=>{const b=h.getBoundingClientRect(),d=Math.abs(b.left+b.width/2-cx);if(d<bd){bd=d;best=h}});
-    rail.querySelectorAll(".hang").forEach(h=>h.classList.toggle("face",h===best))};
-  let t; rail.addEventListener("scroll",()=>{clearTimeout(t);t=setTimeout(pick,60)},{passive:true});
-  addEventListener("resize",pick); setTimeout(()=>{if(mq.matches){const h=rail.querySelectorAll(".hang")[0];rail.scrollLeft=0;pick()}},300);
+  new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting&&!timer&&rd.hidden) startAuto(); if(!e.isIntersecting) stopAuto(); }),{threshold:.3}).observe(rail);
 })();
 
 // 點擊統計：每次點到蝦皮連結，送一筆事件給 Google Analytics
