@@ -24,22 +24,22 @@ gtag('js',new Date());gtag('config','G-JE8Q86BKDQ');
 html.rv .card{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
 html.rv .card.in{opacity:1;transform:none}
 
-/* ===== 文青 lead block ===== */
-section.lead{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 56px;align-items:stretch;background:#f3efe7 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .25 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");padding:52px 60px 40px;border:0;margin-bottom:8px}
-.lead:before{content:"";position:absolute;left:38px;top:-12px;width:96px;height:26px;background:rgba(214,200,170,.6);transform:rotate(-5deg);box-shadow:0 1px 2px rgba(0,0,0,.05)}
-.lead:after{content:"";position:absolute;right:-8px;bottom:22px;width:80px;height:22px;background:rgba(214,200,170,.5);transform:rotate(-38deg)}
-.lead-title{position:relative;display:flex;flex-direction:column;align-items:center;gap:18px}
-.lead h1{flex:none;display:flex;flex-direction:column;gap:.12em;font-family:"Noto Serif TC",serif;font-weight:600;font-size:clamp(36px,3.6vw,48px);letter-spacing:0;line-height:1;margin:0;color:#211f1c}
-.seal{flex:none;display:grid;place-items:center;width:42px;height:42px;background:#b5322a;color:#f8efe6;font-family:"Noto Serif TC",serif;font-weight:600;font-size:24px;border-radius:5px;transform:rotate(-6deg);box-shadow:inset 0 0 0 2px #b5322a,inset 0 0 0 4px rgba(248,239,230,.85);opacity:.92}
-.lead-body{display:flex;flex-direction:column;justify-content:center;gap:18px;border-left:1px solid #cfc5b3;padding-left:52px;max-width:none}
-.lead .eyebrow{color:#8a7f6e}
-.lead .main{font-family:"Noto Serif TC",serif;font-weight:500;font-size:clamp(20px,2.3vw,28px);line-height:1.75;margin:0;color:#211f1c;letter-spacing:.04em}
-.lead .q{color:#b5322a;font-weight:600}
-.lead .sub{font-family:"Noto Serif TC",serif;font-size:15.5px;line-height:1.9;color:#5d574d;margin:0;letter-spacing:.06em}
-.lead .sub br.m{display:none}
-.lead-foot{display:flex;flex-wrap:wrap;gap:6px 20px;justify-content:space-between;align-items:center;margin-top:8px;padding-top:14px;border-top:1px dashed #cfc5b3;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:#8a7f6e}
-.lead-foot .note{font-family:var(--body);letter-spacing:.04em;font-size:12px}
-@media (max-width:720px){section.lead{grid-template-columns:auto minmax(0,1fr);padding:36px 20px 24px;gap:0 20px}.lead:before{left:18px;width:70px;height:20px;top:-9px}.lead:after{display:none}.lead h1{font-size:34px}.seal{width:32px;height:32px;font-size:18px}.lead-body{padding-left:20px;gap:12px}.lead .main{font-size:18px}.lead .sub{font-size:14px}.lead .sub br.m{display:inline}.lead-foot{flex-direction:column;align-items:flex-start}}
+
+/* hero copy overlay */
+.hero{position:relative}
+.hero:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 30% 45% at 86% 34%,rgba(240,239,236,.55),rgba(240,239,236,0) 70%)}
+.hero-copy{position:absolute;z-index:2;right:max(28px,4.5vw);top:13%;max-width:360px;color:#1b1c1d;text-align:right}
+.hero-copy h1{font-size:clamp(36px,3.8vw,56px);margin:8px 0 14px;letter-spacing:.06em}
+.hero-copy .main{font-size:14.5px;line-height:1.9;margin:0 0 8px}
+.hero-copy .note{font-size:12px;color:#3a3b3d;margin:0;font-family:var(--mono);letter-spacing:.04em}
+.hero-copy .eyebrow{color:#3a3b3d}
+@media (max-width:720px){
+ .hero:before{background:linear-gradient(180deg,rgba(244,243,240,.82) 0%,rgba(244,243,240,.55) 26%,rgba(244,243,240,0) 42%)}
+ .hero-copy{position:absolute;left:18px;right:18px;top:22px;max-width:none;text-align:left}
+ .hero-copy h1{font-size:38px;margin:6px 0 10px}
+ .hero-copy .main{font-size:14px;line-height:1.8}
+ .hero-copy .main br{display:none}
+}
 </style>
 <title>日常選物所｜男裝穿搭選物：開久 Casual Select、20SS、Levi's</title>
 <link rel="canonical" href="https://dailyselect.github.io/casual-select/">
@@ -212,7 +212,7 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
 
 .grid.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media (max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:80px 36px}}
-@media (max-width:720px){.group-head{margin-bottom:-28px}.na-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding-bottom:6px}.na-card{flex:0 0 72%;scroll-snap-align:start}.promo{font-size:12px}.hero{padding-top:0}.hero picture{width:100%}.hero img{height:auto;aspect-ratio:4/3;max-height:none;object-position:50% 100%}.lead{grid-template-columns:1fr}.grid,.grid.g3{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 18px}h2{font-size:14.5px}.desc{display:none}.cart{width:38px;height:38px}}
+@media (max-width:720px){.group-head{margin-bottom:-28px}.na-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding-bottom:6px}.na-card{flex:0 0 72%;scroll-snap-align:start}.promo{font-size:12px}.hero{padding-top:0}.hero picture{width:100%}.hero img{height:auto;aspect-ratio:1600/1880;max-height:none;object-position:50% 100%}.lead{grid-template-columns:1fr}.grid,.grid.g3{grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 18px}h2{font-size:14.5px}.desc{display:none}.cart{width:38px;height:38px}}
 @media (prefers-reduced-motion:no-preference){.card:hover .img img{transform:scale(1.03)}}
 @media (prefers-reduced-motion:reduce){.img img{transition:none}}
 
@@ -243,19 +243,17 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
 <div class="promo" role="note" aria-live="off"><div class="ann on"><i class="dot"></i><b>開久期間限定</b>滿 $2,200 送東京來回機票刮刮卡</div><div class="ann"><i class="dot"></i><b>Levi's 雙11</b>全館 3 折起・滿 3 件折 $600</div><div class="ann"><i class="dot"></i><b>20SS</b>11/11 起滿 $1,111 打 85 折</div></div>
 
 <section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow" id="itemcount">Select Shop · 78 Items</div>
+    <h1>日常選物所</h1>
+    <p class="main">衣櫃裡最常穿的，往往不是最搶眼的那件。<br>只挑耐看、好搭、能陪你穿很久的日常單品。</p>
+    <p class="note">價格與優惠 11/7 更新，以蝦皮頁面為準</p>
+  </div>
   <picture><source media="(min-width:721px)" srcset="img/hero-wide.jpg?v=3"><img src="img/hero.jpg?v=3" alt="日常選物所 光影中的衣架裝置"></picture>
 </section>
 
 <div class="wrap">
-  <section class="lead">
-    <div class="lead-title"><h1 aria-label="日常選物所"><span>日</span><span>常</span><span>選</span><span>物</span><span>所</span></h1><span class="seal" aria-hidden="true">選</span></div>
-    <div class="lead-body">
-      <div class="eyebrow" id="itemcount">Select Shop · 78 Items</div>
-      <p class="main"><span class="q">「</span>衣櫃裡最常穿的，<br>往往不是最搶眼的那件。<span class="q">」</span></p>
-      <p class="sub">只挑耐看、好搭、<br class="m">能陪你穿很久的日常單品。</p>
-      <div class="lead-foot"><span>DAILY SELECT — 2026 AW</span><span class="note">價格與優惠 11/7 更新，以蝦皮頁面為準</span></div>
-    </div>
-  </section>
+
 
   <section class="rail-wrap" id="railWrap" aria-label="本週衣架">
     <div class="rail-stage"><div class="rail-bar"></div><div class="rail" id="rail"></div></div>
