@@ -24,7 +24,7 @@ gtag('js',new Date());gtag('config','G-JE8Q86BKDQ');
 <meta property="og:locale" content="zh_TW">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@500;600&family=Cormorant+Garamond:ital,wght@1,500&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: 滿版四聯拍首圖 → 置左文案 → 一行四件、寬留白的商品格；低彩度灰階 */
 :root{
@@ -147,16 +147,17 @@ h2{font-weight:700;font-size:16px;line-height:1.45;margin:0;text-wrap:balance}
 .group-head{grid-column:1/-1;display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--ink);padding-bottom:12px;margin-bottom:-56px}
 .group-head{flex-wrap:wrap}.deals{flex-basis:100%;list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}.deals li{font-size:13px;line-height:1.4;padding:6px 12px;border:1px solid var(--line,#d8d6d0);background:var(--paper,#fff)}.deals li.upd{border:0;background:none;padding:6px 0;color:var(--muted);font-size:12px}
 
-.promo-card{display:grid;grid-template-columns:auto 1fr;gap:18px 28px;align-items:center;width:100%;background:var(--c);color:#fff;padding:22px 26px;border-radius:4px;position:relative;overflow:hidden}
-.promo-card:after{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.07)}
-.pc-tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;background:#fff;color:var(--c);font-weight:700;padding:3px 8px;border-radius:2px}
-.promo-card h3{margin:8px 0 0;font-size:clamp(22px,2.6vw,30px);font-weight:600;letter-spacing:.03em;color:#fff}
-.pc-r{display:flex;flex-direction:column;align-items:flex-end;gap:10px;text-align:right}
-.pc-hl{font-size:clamp(22px,3vw,34px);font-weight:900;letter-spacing:.02em;line-height:1.1}
-.pc-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px}
-.pc-chips li{font-size:12px;background:rgba(255,255,255,.14);padding:5px 10px;border-radius:999px;white-space:nowrap}
-.group-head{border-bottom:0!important;padding-bottom:0!important}
-@media (max-width:720px){.promo-card{grid-template-columns:1fr;padding:18px;gap:10px}.pc-r{align-items:flex-start;text-align:left}.pc-chips{justify-content:flex-start}.pc-hl{font-size:26px}}
+.promo-card{width:100%;background:#f2efe9;color:var(--ink);padding:26px 32px 22px;position:relative}
+.pc-top{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);padding-bottom:14px;border-bottom:1px solid var(--ink)}
+.pc-top .no{color:var(--ink)}
+.pc-main{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:18px 0 14px}
+.promo-card h3{margin:0;font-family:"Cormorant Garamond","Noto Serif TC",serif;font-style:italic;font-weight:500;font-size:clamp(34px,4.4vw,52px);line-height:1;letter-spacing:.005em;color:var(--ink)}
+.promo-card h3 small{font-family:"Noto Serif TC",serif;font-style:normal;font-size:.42em;letter-spacing:.2em;margin-left:10px;vertical-align:middle;color:var(--muted)}
+.pc-hl{font-family:"Noto Serif TC",serif;font-weight:600;font-size:clamp(20px,2.4vw,28px);letter-spacing:.06em;line-height:1.1;white-space:nowrap}
+.pc-chips{list-style:none;margin:0;padding:12px 0 0;border-top:1px solid #d9d4cb;display:flex;flex-wrap:wrap;gap:4px 0;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:#4a4b4c}
+.pc-chips li{white-space:nowrap}
+.pc-chips li+li:before{content:"/";margin:0 12px;color:#b5afa5}
+@media (max-width:720px){.promo-card{padding:20px 18px 16px}.pc-main{flex-direction:column;align-items:flex-start;gap:10px;padding:16px 0 12px}.promo-card h3{font-size:38px}.pc-hl{font-size:21px}.pc-chips{flex-direction:column}.pc-chips li:before,.pc-chips li+li:before{content:"— ";margin:0;color:#b5afa5}}
 .group-head:not(:first-child){margin-top:40px}
 .group-head h3{margin:0;font-size:clamp(24px,3vw,32px);font-weight:500;letter-spacing:.04em}
 .group-head span{font-size:13px;color:var(--muted);letter-spacing:.08em}
@@ -417,7 +418,7 @@ function renderGrid(){
   if(sort==="high") list=[...list].sort((a,b)=>b.price-a.price);
   const sorter = l => sort==="low"?[...l].sort((x,y)=>x.price-y.price):sort==="high"?[...l].sort((x,y)=>y.price-x.price):l;
   if(current==="本週主推"){
-    grid.innerHTML = pickGroups.map(g=>`<div class="group-head"><div class="promo-card" style="--c:${g.color}"><div class="pc-l"><span class="pc-tag">${esc(g.tag)}</span><h3>${esc(g.title)}</h3></div><div class="pc-r"><b class="pc-hl">${esc(g.hl)}</b><ul class="pc-chips">${g.chips.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div></div>`+sorter(g.codes.map(c=>products.find(p=>p.code===c)).filter(Boolean)).map(cardHTML).join("")).join("");
+    grid.innerHTML = pickGroups.map((g,i)=>`<div class="group-head"><div class="promo-card"><div class="pc-top"><span class="no">N°0${i+1}</span><span>${esc(g.tag)}</span></div><div class="pc-main"><h3>${esc(g.title).replace(/ 開久$/,' <small>開久</small>')}</h3><b class="pc-hl">${esc(g.hl)}</b></div><ul class="pc-chips">${g.chips.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></div>`+sorter(g.codes.map(c=>products.find(p=>p.code===c)).filter(Boolean)).map(cardHTML).join("")).join("");
   } else {
     grid.innerHTML = list.map(cardHTML).join("");
   }
