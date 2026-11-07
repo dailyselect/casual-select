@@ -23,6 +23,23 @@ gtag('js',new Date());gtag('config','G-JE8Q86BKDQ');
 .img.moved img.hov{display:none}
 html.rv .card{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
 html.rv .card.in{opacity:1;transform:none}
+
+/* ===== 文青 lead block ===== */
+section.lead{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 56px;align-items:stretch;background:#f3efe7 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .25 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");padding:52px 60px 40px;border:0;margin-bottom:8px}
+.lead:before{content:"";position:absolute;left:38px;top:-12px;width:96px;height:26px;background:rgba(214,200,170,.6);transform:rotate(-5deg);box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.lead:after{content:"";position:absolute;right:-8px;bottom:22px;width:80px;height:22px;background:rgba(214,200,170,.5);transform:rotate(-38deg)}
+.lead-title{position:relative;display:flex;flex-direction:column;align-items:center;gap:18px}
+.lead h1{flex:none;display:flex;flex-direction:column;gap:.12em;font-family:"Noto Serif TC",serif;font-weight:600;font-size:clamp(36px,3.6vw,48px);letter-spacing:0;line-height:1;margin:0;color:#211f1c}
+.seal{flex:none;display:grid;place-items:center;width:42px;height:42px;background:#b5322a;color:#f8efe6;font-family:"Noto Serif TC",serif;font-weight:600;font-size:24px;border-radius:5px;transform:rotate(-6deg);box-shadow:inset 0 0 0 2px #b5322a,inset 0 0 0 4px rgba(248,239,230,.85);opacity:.92}
+.lead-body{display:flex;flex-direction:column;justify-content:center;gap:18px;border-left:1px solid #cfc5b3;padding-left:52px;max-width:none}
+.lead .eyebrow{color:#8a7f6e}
+.lead .main{font-family:"Noto Serif TC",serif;font-weight:500;font-size:clamp(20px,2.3vw,28px);line-height:1.75;margin:0;color:#211f1c;letter-spacing:.04em}
+.lead .q{color:#b5322a;font-weight:600}
+.lead .sub{font-family:"Noto Serif TC",serif;font-size:15.5px;line-height:1.9;color:#5d574d;margin:0;letter-spacing:.06em}
+.lead .sub br.m{display:none}
+.lead-foot{display:flex;flex-wrap:wrap;gap:6px 20px;justify-content:space-between;align-items:center;margin-top:8px;padding-top:14px;border-top:1px dashed #cfc5b3;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:#8a7f6e}
+.lead-foot .note{font-family:var(--body);letter-spacing:.04em;font-size:12px}
+@media (max-width:720px){section.lead{grid-template-columns:auto minmax(0,1fr);padding:36px 20px 24px;gap:0 20px}.lead:before{left:18px;width:70px;height:20px;top:-9px}.lead:after{display:none}.lead h1{font-size:34px}.seal{width:32px;height:32px;font-size:18px}.lead-body{padding-left:20px;gap:12px}.lead .main{font-size:18px}.lead .sub{font-size:14px}.lead .sub br.m{display:inline}.lead-foot{flex-direction:column;align-items:flex-start}}
 </style>
 <title>日常選物所｜男裝穿搭選物：開久 Casual Select、20SS、Levi's</title>
 <link rel="canonical" href="https://dailyselect.github.io/casual-select/">
@@ -229,13 +246,12 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
 
 <div class="wrap">
   <section class="lead">
-    <div>
-      <div class="eyebrow" id="itemcount">Select Shop · 53 Items</div>
-      <h1>日常選物所</h1>
-    </div>
-    <div class="copy">
-      <p class="main">衣櫃裡最常穿的，往往不是最搶眼的那件。只挑耐看、好搭、能陪你穿很久的日常單品。</p>
-      <p class="note">價格與優惠 11/7 更新，以蝦皮頁面為準。</p>
+    <div class="lead-title"><h1 aria-label="日常選物所"><span>日</span><span>常</span><span>選</span><span>物</span><span>所</span></h1><span class="seal" aria-hidden="true">選</span></div>
+    <div class="lead-body">
+      <div class="eyebrow" id="itemcount">Select Shop · 78 Items</div>
+      <p class="main"><span class="q">「</span>衣櫃裡最常穿的，<br>往往不是最搶眼的那件。<span class="q">」</span></p>
+      <p class="sub">只挑耐看、好搭、<br class="m">能陪你穿很久的日常單品。</p>
+      <div class="lead-foot"><span>DAILY SELECT — 2026 AW</span><span class="note">價格與優惠 11/7 更新，以蝦皮頁面為準</span></div>
     </div>
   </section>
 
