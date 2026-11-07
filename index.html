@@ -59,7 +59,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15p
 .hang.face .tag{opacity:1}
 .rail-note{font-size:12px;color:var(--muted);margin-top:8px}
 @media (max-width:760px){.rail-wrap{padding:0 12px}.rail-head h2{font-size:19px}.rail-stage{padding-top:36px}.rail-bar{top:30px}}
-@media (prefers-reduced-motion:reduce){.hang,.hang img{transition:none}.hang.face .sw{animation:none}}
+@media (prefers-reduced-motion:reduce){.hang.face .sw{animation:none}}
 .rd .pic{position:relative;overflow:hidden}
 .rd .pic img{transition:opacity .7s ease}
 .rd .pic img.real{position:absolute;inset:0;width:100%;height:100%;max-height:none;object-fit:cover;opacity:0}
@@ -201,7 +201,6 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
   </section>
 
   <section class="rail-wrap" id="railWrap" aria-label="本週衣架">
-    <div class="rail-head"><h2>本週衣架</h2><span>ON THE RAIL · 開久 CASUAL</span></div>
     <div class="rail-stage"><div class="rail-bar"></div><div class="rail" id="rail"></div></div>
   </section>
   <div class="rd" id="rd" hidden role="dialog" aria-modal="true" aria-label="商品細節"><div class="box"><button class="x" id="rdx" aria-label="關閉">×</button><div class="pic" id="rdpic"><img id="rdimg" alt=""><img class="real" id="rdreal" alt=""></div><div><div class="k" id="rdk"></div><h3 id="rdn"></h3><div class="pr" id="rdp"></div><div class="ds" id="rdd"></div><div class="views" id="rdviews"><button type="button" data-v="real" class="on">實拍</button><button type="button" data-v="cut">衣架示意</button></div><div class="acts"><a class="buy" id="rdbuy" target="_blank" rel="sponsored noopener">到蝦皮購買</a><a class="pg" id="rdpg">看商品頁與實拍照</a></div><div class="ai">示意圖由 AI 依商品實拍生成，顏色與細節以商品頁為準。</div></div></div></div>
@@ -469,7 +468,7 @@ const RAIL=["J36","CT24","J39","T-67","L91","L84"];
   // 聚光：自動輪播，滑過/點選就停
   let ai=0, timer=null, hold=null;
   const face=i=>{ai=(i+hangs.length)%hangs.length; hangs.forEach((h,j)=>{const was=h.classList.contains("face");h.classList.toggle("face",j===ai);if(j===ai&&!was)h._t=Date.now()})};
-  function startAuto(){ if(matchMedia("(prefers-reduced-motion: reduce)").matches) return; stopAuto(); timer=setInterval(()=>face(ai+1),2600); }
+  function startAuto(){ stopAuto(); timer=setInterval(()=>face(ai+1),2600); }
   function stopAuto(){ clearInterval(timer); timer=null; }
   face(0);
   const rd=document.getElementById("rd");
@@ -492,7 +491,9 @@ const RAIL=["J36","CT24","J39","T-67","L91","L84"];
   rdx.addEventListener("click",close); rd.addEventListener("click",e=>{if(e.target===rd)close()});
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!rd.hidden)close()});
   rdbuy.addEventListener("click",()=>{if(typeof gtag==="function"){const c=rdk.textContent.split(" · ").pop();gtag("event","shopee_click",{item_code:c,item_name:rdn.textContent,area:"rail",link_type:"rail_buy",transport_type:"beacon"})}});
-  new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting&&!timer&&rd.hidden) startAuto(); if(!e.isIntersecting) stopAuto(); }),{threshold:.3}).observe(rail);
+  let vis=true; const io=window.IntersectionObserver&&new IntersectionObserver(es=>es.forEach(e=>{vis=e.isIntersecting; if(vis&&!timer&&rd.hidden) startAuto(); if(!vis) stopAuto(); }),{threshold:.15}); io&&io.observe(rail);
+  document.addEventListener("visibilitychange",()=>{ if(document.hidden) stopAuto(); else if(vis&&rd.hidden) startAuto(); });
+  startAuto();
 })();
 
 // 點擊統計：每次點到蝦皮連結，送一筆事件給 Google Analytics
