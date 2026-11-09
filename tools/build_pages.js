@@ -7,6 +7,7 @@ const GA='G-JE8Q86BKDQ';
 const s=fs.readFileSync(path.join(ROOT,'index.html'),'utf8');
 const a=s.indexOf('const products = ['),b=s.indexOf('\n];',a)+3;
 const products=eval(s.slice(a,b-1).replace('const products =','(')+')');
+products.splice(0,products.length,...products.filter(p=>!p.jp));
 const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=n=>'NT$ '+Number(n).toLocaleString('en-US');
 const brandOf=p=>p.brand||'Casual Select 開久';
