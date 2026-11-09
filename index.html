@@ -86,7 +86,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15p
 .rail-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px}
 .rail-head h2{margin:0;font-size:22px;letter-spacing:.04em}
 .rail-head span{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.12em}
-.rail-stage{position:relative;background:linear-gradient(#f4f3f0,#e9e8e3);border-radius:6px;overflow:hidden;padding:44px 0 14px}
+.rail-stage{position:relative;background:linear-gradient(180deg,rgba(255,255,255,0) 70%,rgba(60,58,54,.12)),url(img/concrete.webp) 50% 40%/cover #c9c6c0;border-radius:6px;overflow:hidden;padding:44px 0 14px}
 .rail-bar{position:absolute;left:3%;right:3%;top:38px;height:7px;border-radius:4px;background:linear-gradient(#fdfdfd,#b9bcc0 45%,#8e9196 60%,#e6e7e9);box-shadow:0 3px 6px rgba(0,0,0,.16);z-index:3}
 .rail{--h:300px;--gap:28px;position:relative;display:flex;justify-content:center;align-items:flex-start;gap:var(--gap);padding:0 2%;z-index:2}
 .hang{--k:1;position:relative;flex:0 0 auto;height:calc(var(--h)*1.42 + 34px);width:calc(var(--h)*var(--k)*var(--sa,.3));transition:width .9s cubic-bezier(.65,0,.35,1);cursor:pointer;background:none;border:0;padding:0;outline:none;perspective:900px}
@@ -101,6 +101,11 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15p
 @keyframes swing{0%{transform:rotate(0)}18%{transform:rotate(2.6deg)}38%{transform:rotate(-1.9deg)}58%{transform:rotate(1.1deg)}78%{transform:rotate(-.5deg)}100%{transform:rotate(0)}}
 .hang .tag{position:absolute;left:50%;bottom:0;transform:translateX(-50%);white-space:nowrap;font-size:12px;opacity:0;transition:opacity .4s .3s;background:var(--ink);color:#fff;padding:3px 10px;border-radius:2px;pointer-events:none}
 .hang.face .tag{opacity:1}
+.rail.live .hang,.rail.live .hang.face{transition:none;width:calc(var(--h)*var(--k)*(var(--sa,.3) + (var(--fa,.75) - var(--sa,.3))*var(--f,0)))}
+.rail.live .hang img,.rail.live .hang.face img{transition:none}
+.rail.live .hang img.side,.rail.live .hang.face img.side{opacity:calc((.5 - var(--f,0))*400);transform:translateX(-50%) rotateY(calc(82deg*min(1,var(--f,0)*2)))}
+.rail.live .hang img.front,.rail.live .hang.face img.front{opacity:calc((var(--f,0) - .5)*400);transform:translateX(-50%) rotateY(calc(-82deg*min(1,(1 - var(--f,0))*2)))}
+.rail.live .hang .tag{transition:opacity .25s}
 .rail-note{font-size:12px;color:var(--muted);margin-top:8px}
 @media (max-width:760px){.rail-wrap{padding:0 12px}.rail-head h2{font-size:19px}.rail-stage{padding-top:36px}.rail-bar{top:30px}}
 @media (prefers-reduced-motion:reduce){.hang.face .sw{animation:none}}
@@ -559,9 +564,19 @@ const RAIL=["J36","CT24","LV35","T-67","L91","L84"];
     rd.hidden=false; document.body.style.overflow="hidden"; stopAuto();
     if(typeof gtag==="function") gtag("event","rail_open",{item_code:p.code,item_name:p.name});};
   const close=()=>{rd.hidden=true;document.body.style.overflow="";startAuto()};
-  rail.addEventListener("pointerover",e=>{if(e.pointerType!=="mouse")return; const h=e.target.closest(".hang"); if(!h) return; stopAuto(); face(hangs.indexOf(h));});
-  rail.addEventListener("pointerleave",e=>{if(e.pointerType!=="mouse")return; clearTimeout(hold); hold=setTimeout(startAuto,1500)});
+  // 滑鼠跟隨：游標從左到右，每件衣服依距離連續轉動
+  const stage=rail.parentElement; let live=false, cu=0, tu=0, raf=0;
+  const ss=t=>t<=0?0:t>=1?1:t*t*(3-2*t);
+  const tick=()=>{cu+=(tu-cu)*0.16; let best=0,bf=-1;
+    hangs.forEach((h,j)=>{const f=ss(1-Math.abs(cu-j)); h.style.setProperty("--f",f.toFixed(4)); if(f>bf){bf=f;best=j}});
+    hangs.forEach((h,j)=>{const on=j===best&&bf>.55; if(on&&!h.classList.contains("face"))h._t=Date.now(); h.classList.toggle("face",on)}); ai=best;
+    raf=(live||Math.abs(tu-cu)>.002)?requestAnimationFrame(tick):0;};
+  const setU=e=>{const r=rail.getBoundingClientRect(); const x=Math.min(1,Math.max(0,(e.clientX-r.left-r.width*.06)/(r.width*.88))); const ur=x*(hangs.length-1), i0=Math.floor(ur), t=ur-i0; tu=Math.min(hangs.length-1,i0+ss((t-.38)/.24))};
+  stage.addEventListener("pointerenter",e=>{if(e.pointerType!=="mouse")return; stopAuto(); clearTimeout(hold); cu=ai; setU(e); live=true; rail.classList.add("live"); if(!raf)raf=requestAnimationFrame(tick)});
+  let idle=0; stage.addEventListener("pointermove",e=>{if(e.pointerType!=="mouse"||!live)return; setU(e); clearTimeout(idle); idle=setTimeout(()=>{tu=Math.round(tu); if(!raf)raf=requestAnimationFrame(tick)},180)});
+  stage.addEventListener("pointerleave",e=>{if(e.pointerType!=="mouse")return; live=false; cancelAnimationFrame(raf); raf=0; const i=Math.round(cu); rail.classList.remove("live"); hangs.forEach(h=>h.style.removeProperty("--f")); face(i); clearTimeout(hold); hold=setTimeout(startAuto,1500)});
   rail.addEventListener("click",e=>{const h=e.target.closest(".hang"); if(!h) return; const i=hangs.indexOf(h);
+    if(live){open(hangs[ai].dataset.code);return}
     if(!h.classList.contains("face")||Date.now()-(h._t||0)<450){h._t=h._t&&Date.now()-h._t<450?h._t:Date.now(); stopAuto(); face(i); clearTimeout(hold); hold=setTimeout(startAuto,8000); return}
     open(h.dataset.code)});
   rdx.addEventListener("click",close); rd.addEventListener("click",e=>{if(e.target===rd)close()});
