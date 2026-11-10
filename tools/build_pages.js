@@ -7,7 +7,7 @@ const GA='G-JE8Q86BKDQ';
 const s=fs.readFileSync(path.join(ROOT,'index.html'),'utf8');
 const a=s.indexOf('const products = ['),b=s.indexOf('\n];',a)+3;
 const products=eval(s.slice(a,b-1).replace('const products =','(')+')');
-products.splice(0,products.length,...products.filter(p=>!p.jp));
+const JP_DM='https://www.threads.com/@richang_select';
 const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=n=>'NT$ '+Number(n).toLocaleString('en-US');
 const brandOf=p=>p.brand||'Casual Select 開久';
@@ -17,9 +17,9 @@ fs.mkdirSync(path.join(ROOT,'p'),{recursive:true});
 for(const f of fs.readdirSync(path.join(ROOT,'p'))) if(f.endsWith('.html')) fs.unlinkSync(path.join(ROOT,'p',f));
 for(const p of products){
   const url=`${BASE}p/${slug(p.code)}.html`, title=`${p.name}｜${brandOf(p)}｜日常選物所`;
-  const desc=`${brandOf(p)} ${p.name}：${p.desc} 蝦皮售價 ${fmt(p.price)}${p.sold?`，已售出 ${p.sold}`:''}。`;
-  const rel=products.filter(q=>q.code!==p.code&&brandOf(q)===brandOf(p)).slice(0,4);
-  const ld={"@context":"https://schema.org","@type":"Product",name:p.name,image:imgs(p,true),description:p.desc,sku:p.code,category:p.cat,brand:{"@type":"Brand",name:brandOf(p)},offers:{"@type":"Offer",price:String(p.price),priceCurrency:"TWD",availability:"https://schema.org/InStock",url:p.link}};
+  const desc=p.jp?`${brandOf(p)} ${p.name}：${p.desc} 日本海外連線${p.stock?'・'+p.stock:''}，私訊詢價。`:`${brandOf(p)} ${p.name}：${p.desc} 蝦皮售價 ${fmt(p.price)}${p.sold?`，已售出 ${p.sold}`:''}。`;
+  const rel=products.filter(q=>q.code!==p.code&&(p.jp?q.jp:(!q.jp&&brandOf(q)===brandOf(p)))).slice(0,4);
+  const ld={"@context":"https://schema.org","@type":"Product",name:p.name,image:imgs(p,true),description:p.desc,sku:p.code,category:p.cat,brand:{"@type":"Brand",name:brandOf(p)},offers:p.jp?undefined:{"@type":"Offer",price:String(p.price),priceCurrency:"TWD",availability:"https://schema.org/InStock",url:p.link}};
   const html=`<!doctype html>
 <html lang="zh-Hant-TW"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -61,6 +61,7 @@ h1{font-size:clamp(24px,3.4vw,34px);line-height:1.3;margin:10px 0 18px;font-weig
 .price .now{font-size:28px;font-weight:700}
 .price s{color:var(--muted)}
 .price .off{color:var(--sale);font-family:var(--mono);font-size:13px}
+.jpst{font-size:15px;font-weight:700;border:1.5px solid var(--ink);padding:2px 12px}
 .sold{color:var(--muted);font-size:13px;margin-top:4px}
 .desc{margin:24px 0;padding:20px 0;border-block:1px solid var(--line);font-size:16px;line-height:1.9}
 .buy{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;padding:16px 20px;font-size:16px}
@@ -84,14 +85,15 @@ h1{font-size:clamp(24px,3.4vw,34px);line-height:1.3;margin:10px 0 18px;font-weig
   <div>
     <div class="meta">${esc(brandOf(p))} · ${esc(p.cat)} · ${esc(p.code)}</div>
     <h1>${esc(p.name)}</h1>
-    <div class="price"><span class="now">${fmt(p.price)}</span>${p.orig?`<s>${fmt(p.orig)}</s>`:''}${p.off?`<span class="off">${esc(p.off)}</span>`:''}</div>
+    ${p.jp?`<div class="price"><span class="jpst">${esc(p.stock||'預購')}</span><span class="off">日本海外連線</span></div>`:`<div class="price"><span class="now">${fmt(p.price)}</span>${p.orig?`<s>${fmt(p.orig)}</s>`:''}${p.off?`<span class="off">${esc(p.off)}</span>`:''}</div>`}
     ${p.sold?`<div class="sold">蝦皮已售出 ${esc(p.sold)}</div>`:''}
     <p class="desc">${esc(p.desc)}</p>
-    <a class="buy" href="${esc(p.link)}" target="_blank" rel="sponsored noopener">購買</a>
-    <p class="fine">價格與銷量以蝦皮頁面為準。本頁連結為蝦皮分潤連結，透過連結購買不會讓你多付錢。</p>
+    ${p.jp?`<a class="buy" href="${JP_DM}" target="_blank" rel="noopener">私訊詢問</a>
+    <p class="fine">日本代購商品，價格依匯率與運費報價，請私訊 Threads @richang_select 詢問。</p>`:`<a class="buy" href="${esc(p.link)}" target="_blank" rel="sponsored noopener">購買</a>
+    <p class="fine">價格與銷量以蝦皮頁面為準。本頁連結為蝦皮分潤連結，透過連結購買不會讓你多付錢。</p>`}
   </div>
 </main>
-${rel.length?`<section class="rel"><h2>同品牌其他單品</h2><ul>${rel.map(q=>`<li><a href="${slug(q.code)}.html"><img src="${esc(imgs(q)[0])}" alt="${esc(q.name)}" loading="lazy"><div class="n">${esc(q.name)}</div><div class="p">${fmt(q.price)}</div></a></li>`).join('')}</ul></section>`:''}
+${rel.length?`<section class="rel"><h2>同品牌其他單品</h2><ul>${rel.map(q=>`<li><a href="${slug(q.code)}.html"><img src="${esc(imgs(q)[0])}" alt="${esc(q.name)}" loading="lazy"><div class="n">${esc(q.name)}</div><div class="p">${q.jp?esc(q.stock||'預購'):fmt(q.price)}</div></a></li>`).join('')}</ul></section>`:''}
 <script>
 document.querySelectorAll('.thumbs button').forEach(b=>b.onclick=()=>{document.getElementById('mainimg').src=b.dataset.src;document.querySelectorAll('.thumbs button').forEach(x=>x.setAttribute('aria-current',x===b))});
 document.addEventListener('click',e=>{const a=e.target.closest('a[rel~="sponsored"]');if(!a||typeof gtag!=='function')return;gtag('event','shopee_click',{item_code:${JSON.stringify(p.code)},item_name:${JSON.stringify(p.name)},area:'product_page',tab:'',link_type:'buy_button',transport_type:'beacon'})});

@@ -476,7 +476,7 @@ function renderFilters(){
   placeInk();
   filters.querySelectorAll(".chip").forEach((b,i)=>b.onclick=()=>{current=cats[i];if(query){query="";qEl.value="";try{const u=new URL(location.href);u.searchParams.delete("q");history.replaceState(null,"",u)}catch(e){}}renderFilters();renderGrid()});
 }
-const link = (p,inner) => p.jp?`<a class="imglink" href="${JP_DM}" target="_blank" rel="noopener" tabindex="-1" aria-label="私訊詢問 ${esc(p.name)}">${inner}</a>`:`<a class="imglink" href="p/${encodeURIComponent(p.code)}.html" tabindex="-1" aria-label="${esc(p.name)} 商品頁">${inner}</a>`;
+const link = (p,inner) => `<a class="imglink" href="p/${encodeURIComponent(p.code)}.html" tabindex="-1" aria-label="${esc(p.name)} 商品頁">${inner}</a>`;
 function gallery(p){
   const n = p.n || 1, alt = esc(p.code+' '+p.name);
   if(n===1) return link(p,`<img src="${p.imgs?`https://down-tw.img.susercontent.com/file/${esc(p.imgs[0])}@resize_w450_nl.webp`:`img/${esc(p.code)}.jpg`}" alt="${alt}" loading="lazy" onerror="this.replaceWith(document.createRange().createContextualFragment(art('${p.icon}')))">`);
@@ -501,7 +501,7 @@ const cardHTML = p=>`
       <div class="img">${gallery(p)}<span class="code">${esc(p.label||p.code)}</span>${p.made?'<span class="made">開久製造</span>':""}</div>
       <div class="body">
         <div class="meta">${esc(p.brand||"Casual Select")} · ${esc(p.cat)}</div>
-        <h2><a class="plink" href="${p.jp?JP_DM:`p/${encodeURIComponent(p.code)}.html`}"${p.jp?' target="_blank" rel="noopener"':""}>${esc(p.name)}</a></h2>
+        <h2><a class="plink" href="p/${encodeURIComponent(p.code)}.html">${esc(p.name)}</a></h2>
         <p class="desc">${esc(p.desc)}</p>
         <div class="foot${p.jp?" jpfoot":""}">
           <div class="pricebox"><div class="was">${p.orig?`<s class="orig">${fmt(p.orig)}</s>${p.off?`<span class="off">${esc(p.off)}</span>`:""}`:""}</div>${p.jp?"":`<div class="price"><span class="${p.orig?"now":""}">${p.price?fmt(p.price):"私訊詢價"}</span></div>`}${p.jp?`<div class="deal jp">${esc(p.stock||"預購")}</div>`:""}${p.brand==="Levi's"?`<div class="deal">2 件折 $300</div>`:""}${p.sold?`<div class="sold">蝦皮已售出 ${esc(p.sold)}</div>`:""}</div>
