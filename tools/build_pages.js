@@ -30,7 +30,7 @@ for(const p of products){
 <meta property="og:title" content="${esc(p.name)}｜${esc(brandOf(p))}">
 <meta property="og:description" content="${esc(p.desc)}">
 <meta property="og:image" content="${imgs(p,true)[0]}">
-<meta property="og:site_name" content="日常選物所 DAILY SELECT"><meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="日常選物所 The Daily Collection"><meta property="og:locale" content="zh_TW">
 <meta name="twitter:card" content="summary_large_image">
 <script async src="https://www.googletagmanager.com/gtag/js?id=${GA}"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
