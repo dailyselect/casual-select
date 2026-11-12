@@ -264,6 +264,7 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
 /* 海外連線 */
 .jp-head{grid-column:1/-1;display:grid;grid-template-columns:1.2fr 1fr;gap:28px 48px;align-items:center;background:#f4f1ec;border-left:4px solid #bc002d;padding:34px 40px;margin-bottom:8px}
 .jp-k{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:#bc002d}
+.jp-sec{grid-column:1/-1;display:flex;align-items:baseline;gap:14px;border-bottom:1.5px solid var(--ink,#1b1c1d);padding:26px 0 10px;margin-top:6px}.jp-sec span{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.18em;color:#bc002d}.jp-sec h4{margin:0;font-size:22px;letter-spacing:.06em}.jp-sec i{font-style:normal;margin-left:auto;font-size:13px;color:var(--muted,#6a6b6c)}
 .jp-head h3{margin:10px 0 8px;font-size:clamp(24px,2.6vw,34px);letter-spacing:.04em}
 .jp-head p{margin:0 0 18px;color:var(--muted)}
 .jp-rules{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:14px}
@@ -332,13 +333,14 @@ footer{margin-top:120px;padding-top:18px;border-top:1px solid var(--line);font-s
 const products = [
   {code:"JP01", jp:true, label:"OVERSEAS", brand:"U.S. POLO ASSN. × PUBLUX", cat:"上身", icon:"long", n:5, stock:"預購", name:"日本限定聯名 亨利領刺繡針織衫", desc:"大學T的休閒感＋針織上衣的質感。經典亨利領排釦、胸前品牌刺繡、寬鬆版型男女都能穿；搭牛仔褲美式休閒，搭西裝褲俐落。"},
   {code:"JP02", jp:true, label:"OVERSEAS", brand:"KEEN", cat:"配件", icon:"bag", n:5, stock:"少量 US10/11", name:"Barbados TG 全黑夾腳拖", desc:"型號 1029155。經典夾腳設計＋KEEN 標誌性鞋頭包覆，全黑配色不挑穿搭，搭寬褲、短褲都有日系戶外感。"},
-  {code:"JP03", jp:true, label:"OVERSEAS", brand:"ルラク", cat:"配件", icon:"bag", n:5, stock:"預購", name:"繩編提把托特包／肩背包", desc:"日本小眾品牌，霧面合成皮革低調有質感，編繩提把是亮點；容量適中，筆電橫放放得下，通勤好用。"},
-  {code:"JP04", jp:true, label:"OVERSEAS", brand:"FIRSTHAND", cat:"配件", icon:"bag", n:5, stock:"預購", name:"皮革三角托特包", desc:"全牛皮，軟皮自然垂墜成三角輪廓，單肩一背就有型。寬 38 × 高 28 × 底 7.5 cm，重約 420 g，日常小物、長夾、水瓶剛好裝。"},
-  {code:"JP05", jp:true, label:"OVERSEAS", brand:"FIRSTHAND", cat:"配件", icon:"bag", n:5, stock:"預購", name:"大容量皮革市集托特包", desc:"防潑水牛皮，包身寬底深、容量大，提把可手提也可掛肩。寬 30 × 高 32 × 底 18 cm，重約 515 g，通勤、週末採買都好用。"},
-  {code:"JP06", jp:true, label:"OVERSEAS", brand:"FIRSTHAND", cat:"配件", icon:"bag", n:5, stock:"預購", name:"牛皮大口袋後背包", desc:"Daytona 限定款。全牛皮後背包，正面大口袋好收納，皮革越背越有光澤。寬 31 × 高 48.5 × 厚 12 cm，筆電、文件都放得下。"},
-  {code:"JP07", jp:true, label:"OVERSEAS", brand:"FIRSTHAND", cat:"配件", icon:"bag", n:5, stock:"預購", name:"牛皮三折迷你短夾", desc:"Daytona 限定款。防潑水牛皮三折短夾，7 × 10 cm 小巧一手掌握，零錢、卡片、紙鈔都收得下，放褲袋、小包都輕鬆。"},
+  {code:"JP03", jp:true, kind:"bag", label:"OVERSEAS", brand:"ルラク", cat:"配件", icon:"bag", n:5, stock:"預購", name:"繩編提把托特包／肩背包", desc:"日本小眾品牌，霧面合成皮革低調有質感，編繩提把是亮點；容量適中，筆電橫放放得下，通勤好用。"},
+  {code:"JP04", jp:true, kind:"bag", label:"OVERSEAS", brand:"FIRSTHAND", cat:"配件", icon:"bag", n:5, stock:"預購", name:"皮革三角托特包", desc:"全牛皮，軟皮自然垂墜成三角輪廓，單肩一背就有型。寬 38 × 高 28 × 底 7.5 cm，重約 420 g，日常小物、長夾、水瓶剛好裝。"},
+  {code:"JP05", jp:true, kind:"bag", label:"OVERSEAS", brand:"FIRSTHAND", cat:"配件", icon:"bag", n:5, stock:"預購", name:"大容量皮革市集托特包", desc:"防潑水牛皮，包身寬底深、容量大，提把可手提也可掛肩。寬 30 × 高 32 × 底 18 cm，重約 515 g，通勤、週末採買都好用。"},
+  {code:"JP06", jp:true, kind:"bag", label:"OVERSEAS", brand:"FIRSTHAND", cat:"配件", icon:"bag", n:5, stock:"預購", name:"牛皮大口袋後背包", desc:"Daytona 限定款。全牛皮後背包，正面大口袋好收納，皮革越背越有光澤。寬 31 × 高 48.5 × 厚 12 cm，筆電、文件都放得下。"},
+  {code:"JP07", jp:true, kind:"bag", label:"OVERSEAS", brand:"FIRSTHAND", cat:"配件", icon:"bag", n:5, stock:"預購", name:"牛皮三折迷你短夾", desc:"Daytona 限定款。防潑水牛皮三折短夾，7 × 10 cm 小巧一手掌握，零錢、卡片、紙鈔都收得下，放褲袋、小包都輕鬆。"},
   {code:"JP08", jp:true, label:"OVERSEAS", brand:"U.S. POLO ASSN. × PUBLUX", cat:"上身", icon:"long", n:5, stock:"預購・11/15 前收單", name:"日本限定別注 全拉鍊針織帽T", desc:"Daytona 限定展開。柔軟針織做成全拉鍊連帽外套，胸前小馬刺繡低調有型；灰／黑／深藍三色，FREE 寬鬆版型男女都能穿，單穿或當外套內搭都好用。"},
   {code:"JP09", jp:true, label:"OVERSEAS", brand:"FREAK'S STORE", cat:"上身", icon:"long", n:5, stock:"預購・11/15 前收單", name:"畦編針織拉鍊帽T", desc:"Daytona 限定展開。畦編（羅紋）粗針織立體有份量，全拉鍊連帽、寬鬆落肩；五色 S／M／L，秋冬套在 T 恤、襯衫外面就很有日系感。"},
+  {code:"JP10", jp:true, label:"OVERSEAS", brand:"SELLE GLANT", cat:"上身", icon:"long", n:5, stock:"預購", name:"羅紋亨利領連帽上衣", desc:"日本 ZOZO 選品。羅紋針織加上亨利領排釦與連帽，一件同時有休閒和質感；黑色、灰米兩色，S／M／L，單穿或疊在外套裡都好看。"},
   {code:"J38", n:4,  name:"輕防曬連帽外套", cat:"外套", icon:"jacket", price:1240, desc:"輕薄尼龍布料，防潑水，雙拉鍊，換季帶著走剛好。", sold:"162", link:"https://s.shopee.tw/W7mKrSYtE"},
   {code:"CJ02", n:4, name:"Boxy Zipped Hoodie 短版連帽外套", cat:"外套", icon:"zip", price:1330, made:1, desc:"短版 Boxy 輪廓的拉鍊帽外套，刷毛內裡夠保暖。", sold:"118", link:"https://s.shopee.tw/4Vdv6GlFcH"},
 
@@ -525,7 +527,9 @@ function renderGrid(){
   if(current==="本週主推"){
     grid.innerHTML = pickGroups.map((g,i)=>{const em=t=>esc(t).replace(/(\$?[\d,]+)/g,"<em>$1</em>");return `<div class="group-head"><div class="promo-card"><div class="pc-stripe"></div><span class="pc-brand">${esc(g.title)}</span><div class="pc-l"><div class="pc-big"><b>${esc(g.big)}</b><span>${g.side.map(esc).join("<br>")}</span></div><div class="pc-sub">${em(g.sub)}</div></div><div class="pc-r"><ul class="pc-bars">${g.bars.map(x=>`<li><i>${em(x)}</i></li>`).join("")}</ul><span class="pc-tag">${esc(g.tag)}</span></div></div></div>`+sorter(g.codes.map(c=>products.find(p=>p.code===c)).filter(Boolean)).map(cardHTML).join("")}).join("");
   } else if(current==="🌏 海外連線"){
-    grid.innerHTML = JP_HEAD + (list.length?list.map(cardHTML).join(""):`<div class="jp-empty"><p>本期連線商品整理中</p><span>任何海外品牌、小眾選物，都可以帶圖私訊詢問</span><a class="dm big" href="${JP_DM}" target="_blank" rel="noopener">帶圖私訊詢問</a></div>`);
+    const sec=(t,en,l)=>l.length?`<div class="jp-sec"><span>${en}</span><h4>${t}</h4><i>${l.length} 件</i></div>`+l.map(cardHTML).join(""):"";
+    const jpBags=list.filter(p=>p.kind==="bag"), jpWear=list.filter(p=>p.kind!=="bag");
+    grid.innerHTML = JP_HEAD + (list.length?sec("包款","BAGS",jpBags)+sec("服飾","APPAREL",jpWear):`<div class="jp-empty"><p>本期連線商品整理中</p><span>任何海外品牌、小眾選物，都可以帶圖私訊詢問</span><a class="dm big" href="${JP_DM}" target="_blank" rel="noopener">帶圖私訊詢問</a></div>`);
   } else {
     grid.innerHTML = list.map(cardHTML).join("");
   }
