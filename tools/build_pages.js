@@ -64,6 +64,12 @@ h1{font-size:clamp(24px,3.4vw,34px);line-height:1.3;margin:10px 0 18px;font-weig
 .jpst{font-size:15px;font-weight:700;border:1.5px solid var(--ink);padding:2px 12px}
 .sold{color:var(--muted);font-size:13px;margin-top:4px}
 .desc{margin:24px 0;padding:20px 0;border-block:1px solid var(--line);font-size:16px;line-height:1.9}
+.spec{margin:0 0 22px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:14px}
+.spec dt{color:var(--muted);white-space:nowrap}.spec dd{margin:0}
+.sz{margin:0 0 26px}.sz h2{font-size:13px;font-family:var(--mono);letter-spacing:.14em;color:var(--muted);font-weight:500;margin:0 0 8px}
+.sz table{width:100%;border-collapse:collapse;font-size:14px;text-align:center}
+.sz th,.sz td{border-bottom:1px solid var(--line);padding:8px 4px}.sz th{font-weight:700;background:#f7f7f6}.sz td:first-child,.sz th:first-child{text-align:left;font-weight:700}
+.sz p{font-size:12px;color:var(--muted);margin:6px 0 0}
 .buy{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;padding:16px 20px;font-size:16px}
 .buy:hover{opacity:.9}
 .fine{font-size:12.5px;color:var(--muted);margin-top:10px}
@@ -88,6 +94,8 @@ h1{font-size:clamp(24px,3.4vw,34px);line-height:1.3;margin:10px 0 18px;font-weig
     ${p.jp?`<div class="price"><span class="jpst">${esc(p.stock||'預購')}</span><span class="off">日本海外連線</span></div>`:`<div class="price"><span class="now">${fmt(p.price)}</span>${p.orig?`<s>${fmt(p.orig)}</s>`:''}${p.off?`<span class="off">${esc(p.off)}</span>`:''}</div>`}
     ${p.sold?`<div class="sold">蝦皮已售出 ${esc(p.sold)}</div>`:''}
     <p class="desc">${esc(p.desc)}</p>
+    ${p.spec?`<dl class="spec">${p.spec.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>`:''}
+    ${p.size?`<div class="sz"><h2>SIZE 尺寸表（cm）</h2><table><thead><tr>${p.size.head.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${p.size.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>${p.size.note?`<p>${esc(p.size.note)}</p>`:''}</div>`:''}
     ${p.jp?`<a class="buy" href="${JP_DM}" target="_blank" rel="noopener">私訊詢問</a>
     <p class="fine">日本代購商品，價格依匯率與運費報價，請私訊 Threads @richang_select 詢問。</p>`:`<a class="buy" href="${esc(p.link)}" target="_blank" rel="sponsored noopener">購買</a>
     <p class="fine">價格與銷量以蝦皮頁面為準。本頁連結為蝦皮分潤連結，透過連結購買不會讓你多付錢。</p>`}
